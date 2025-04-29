@@ -1,0 +1,90 @@
+/* src/style/global.css */
+:root {
+  /* Màu chủ đạo dựa theo style Basler (gần giống Haruchika) */
+  --color-primary: #1A2941;       /* Xanh đậm sang trọng */
+  --color-secondary: #0090D0;     /* Xanh biển công nghệ */
+  --color-accent: #0070A3;        /* Xanh nhấn */
+  --color-background: #ffffff;    /* Nền trắng sạch */
+  --color-surface: #f4f7fa;       /* Nền phụ */
+  --color-text: #1A2941;          /* Màu chữ */
+  --color-border: #dbe3ec;
+
+  /* Font */
+  --font-main: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Bo góc và đổ bóng */
+  --radius-md: 8px;
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.05);
+
+  /* Padding và margin */
+  --padding: 16px;
+  --margin: 16px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  background-color: var(--color-secondary);
+  color: white;
+  font-size: 16px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  transition: background 0.3s ease, transform 0.2s ease;
+  border: none;
+}
+
+button:hover {
+  background-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+  transform: translateY(0px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Input, Select, Textarea */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: white;
+  font-size: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px rgba(0, 144, 208, 0.2);
+  outline: none;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}

@@ -1,0 +1,16 @@
+.snackbar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2e7d32;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 6px;
+  animation: fadein 0.5s;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
