@@ -9,6 +9,9 @@ import Cameras from "./pages/products/Cameras";
 import Hardwares from "./pages/products/Hardwares";
 import ProductDetail from "./pages/products/ProductDetail";
 import Softwares from "./pages/products/Softwares";
+import Solutions from "./pages/Solutions";
+import Support from "./pages/Support";
+import Contact from "./pages/Contact";
 
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
@@ -60,6 +63,12 @@ function AppRoutes() {
         <Route path="/product/softwares" element={<Softwares />}></Route>
         {/* Route cho chi tiết sản phẩm */}
         <Route path="/product/:type/:id" element={<ProductDetail />} />
+        {/* giải pháp */}
+        <Route path="/solutions"element={<Solutions/>}></Route>
+        {/* Hỗ trợ */}
+        <Route path="/support" element={<Support/>}></Route>
+        {/* Liên hệ */}
+        <Route path="/contact" element={<Contact/>}></Route>
       </Routes>
     </UserLayout>
   );

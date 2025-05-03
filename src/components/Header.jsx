@@ -29,7 +29,7 @@ export default function Header() {
         <Link to="/products" className="nav-item">
           Sản phẩm
         </Link>
-        <Link to="/solution" className="nav-item">
+        <Link to="/solutions" className="nav-item">
           Giải pháp
         </Link>
         <Link to="/support" className="nav-item">

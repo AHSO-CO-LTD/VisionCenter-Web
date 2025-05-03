@@ -1,0 +1,207 @@
+.solutions-page {
+  font-family: "Segoe UI", sans-serif;
+  color: #1f2a37;
+  background-color: #f9fafb;
+  padding-bottom: 60px;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 80px 20px 60px;
+  background: linear-gradient(to right, #004080, #0072c6);
+  color: white;
+}
+.hero-section h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.hero-section p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Solution Cards */
+.solution-cards {
+  padding: 60px 20px;
+  text-align: center;
+}
+.solution-cards h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+.card-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 300px;
+  padding: 20px;
+  text-align: left;
+  transition: transform 0.3s;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.card h3 {
+  margin-top: 15px;
+  font-size: 1.3rem;
+}
+.card p {
+  margin: 10px 0;
+}
+.card a {
+  text-decoration: none;
+  color: #2563eb;
+  font-weight: bold;
+}
+
+/* Benefit Section */
+.benefits-section {
+  background-color: #f1f5f9;
+  padding: 60px 20px;
+  text-align: center;
+}
+.benefits-section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.benefits-list li {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Features Section */
+.features-section {
+  padding: 60px 20px;
+  text-align: center;
+}
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+.feature-item {
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 280px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+.feature-item h3 {
+  margin-bottom: 10px;
+}
+
+/* Testimonials */
+.testimonials-section {
+  background: linear-gradient(to right, #004080, #0072c6);
+  padding: 60px 20px;
+  text-align: center;
+  color: white;
+}
+.testimonial {
+  max-width: 700px;
+  margin: 0 auto;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+.testimonial h4 {
+  margin-top: 20px;
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+/* Industries Section */
+.industries-section {
+  padding: 60px 20px;
+  text-align: center;
+}
+.industries-section h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+.industry-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.industry-item {
+  width: 200px;
+  text-align: center;
+}
+.industry-item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.industry-item h4 {
+  margin-top: 10px;
+  font-size: 1.1rem;
+}
+
+/* Contact Section */
+.contact-section {
+  background: linear-gradient(to right, #004080, #0072c6);
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+.contact-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+.contact-section p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 30px;
+}
+.contact-us-btn {
+  background-color: white;
+  color: #1d4ed8;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.contact-us-btn:hover {
+  background: linear-gradient(to right, #004080, #0072c6);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-grid,
+  .features-grid,
+  .industry-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}

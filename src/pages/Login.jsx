@@ -5,7 +5,7 @@ import PageWrapper from "../components/PageWrapper";
 import { useAuth } from "../context/AuthContext";
 import API from "../utils/api";
 
-export default function Login() {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
@@ -15,7 +15,6 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await API.post("/auth/login", { email, password });
-
       const user = res.data.user;
 
       localStorage.setItem("token", res.data.token);
@@ -23,6 +22,7 @@ export default function Login() {
 
       login(user); // cập nhật context
       toast.success("Đăng nhập thành công!");
+
       // Phân quyền điều hướng theo vai trò
       if (user.role === "admin") {
         navigate("/admin");
@@ -37,26 +37,29 @@ export default function Login() {
 
   return (
     <PageWrapper>
-      <form onSubmit={handleLogin}>
-        <h2>Đăng nhập</h2>
-        <input
-          value={email}
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
-        <input
-          value={password}
-          type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button type="submit">Đăng nhập</button>
-        {/* Chuyển trang trang đăng ký */}
-        <p style={{ marginTop: "1rem" }}>
-          Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
-        </p>
-      </form>
+      <div className="form-container">
+        <form onSubmit={handleLogin} className="form-login">
+          <h2>Đăng nhập</h2>
+          <input
+            value={email}
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            required
+          />
+          <input
+            value={password}
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Mật khẩu"
+            required
+          />
+          <button type="submit">Đăng nhập</button>
+          <p>
+            Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
+          </p>
+        </form>
+      </div>
     </PageWrapper>
   );
 }

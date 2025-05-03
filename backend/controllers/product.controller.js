@@ -61,34 +61,34 @@ exports.getCameraById = async (req, res) => {
 
 // Lấy chi tiết sản phẩm hardware
 exports.getHardwareById = async (req, res) => {
-   const { id } = req.params;
-   try {
-     const [rows] = await Product.getHardwareById(id);
-     if (rows.length === 0) {
-       return res.status(404).json({ message: "Không tìm thấy sản phẩm" });
-     }
-     res.json(rows[0]);
-   } catch (err) {
-     res
-       .status(500)
-       .json({ message: "Lỗi khi lấy chi tiết hardware: " + err.message });
-   }
+  const { id } = req.params;
+  try {
+    const [rows] = await Product.getHardwareById(id);
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "Không tìm thấy sản phẩm" });
+    }
+    res.json(rows[0]);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Lỗi khi lấy chi tiết hardware: " + err.message });
+  }
 };
 
 // Lấy chi tiết sản phẩm software
 exports.getSoftwareById = async (req, res) => {
-   const { id } = req.params;
-   try {
-     const [rows] = await Product.getSoftwareById(id);
-     if (rows.length === 0) {
-       return res.status(404).json({ message: "Không tìm thấy sản phẩm" });
-     }
-     res.json(rows[0]);
-   } catch (err) {
-     res
-       .status(500)
-       .json({ message: "Lỗi khi lấy chi tiết phần mềm: " + err.message });
-   }
+  const { id } = req.params;
+  try {
+    const [rows] = await Product.getSoftwareById(id);
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "Không tìm thấy sản phẩm" });
+    }
+    res.json(rows[0]);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Lỗi khi lấy chi tiết phần mềm: " + err.message });
+  }
 };
 
 exports.createProduct = async (req, res) => {
@@ -121,5 +121,16 @@ exports.deleteProduct = async (req, res) => {
     res.json({ message: "Xóa thành công" });
   } catch (err) {
     res.status(500).json({ message: "Lỗi khi xóa sản phẩm: " + err.message });
+  }
+};
+// Sản phẩm nổi bật
+exports.getHighlightedProducts = async (req, res) => {
+  try {
+    const result = await Product.getHighlightedProducts();
+    res.json(result);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Lỗi khi lấy sản phẩm nổi bật: " + error.message });
   }
 };

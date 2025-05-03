@@ -12,6 +12,7 @@ export default function ProductDetail() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { addToCart } = useCart();
+
   useEffect(() => {
     // Tùy vào loại sản phẩm, gọi API tương ứng
     let endpoint;
@@ -27,6 +28,7 @@ export default function ProductDetail() {
       .then((res) => setProductDetail(res.data))
       .catch((err) => console.error("Lỗi khi lấy chi tiết sản phẩm:", err));
   }, [id, type]);
+
   // Thêm vào giỏ hàng
   const handleAddToCart = async () => {
     if (!user) {
@@ -52,28 +54,30 @@ export default function ProductDetail() {
   return (
     <PageWrapper>
       <div className="product-detail-container">
-        <div className="product-image">
+        <div className="product-detail-image">
           <img
             src={`${productDetail.avartar}`}
             alt={productDetail.name}
-            className="product-image-1"
+            className="product-detail-image-1"
           />
           <img
             src={`${productDetail.avartar_2}`}
             alt={productDetail.name}
-            className="product-image-2"
+            className="product-detail-image-2"
           />
         </div>
-        <div className="product-info">
-          <h1 className="product-name">{productDetail.name}</h1>
-          <p className="product-price">
+        <div className="product-detail-info">
+          <h1 className="product-detail-name">{productDetail.name}</h1>
+          <p className="product-detail-price">
             {productDetail.price.toLocaleString()} đ
           </p>
-          <p className="product-description">{productDetail.description}</p>
+          <p className="product-detail-description">
+            {productDetail.description}
+          </p>
 
           {/* Các thuộc tính sản phẩm sẽ được hiển thị ở đây */}
           {productDetail.type === "camera" && (
-            <div className="camera-details">
+            <div className="product-detail-details">
               <p>
                 <strong>Model:</strong> {productDetail.model}
               </p>
@@ -105,7 +109,7 @@ export default function ProductDetail() {
           )}
 
           {productDetail.type === "hardware" && (
-            <div className="hardware-details">
+            <div className="product-detail-details">
               <p>
                 <strong>Model:</strong> {productDetail.model}
               </p>
@@ -119,7 +123,7 @@ export default function ProductDetail() {
           )}
 
           {productDetail.type === "software" && (
-            <div className="software-details">
+            <div className="product-detail-details">
               <p>
                 <strong>Version:</strong> {productDetail.version}
               </p>
@@ -136,7 +140,10 @@ export default function ProductDetail() {
             </div>
           )}
 
-          <button className="add-to-cart-btn" onClick={handleAddToCart}>
+          <button
+            className="product-detail-add-to-cart-btn"
+            onClick={handleAddToCart}
+          >
             Thêm vào giỏ hàng
           </button>
         </div>

@@ -1,18 +1,3 @@
-// const express = require('express');
-// const router = express.Router();
-// const {
-//   getAllProducts,
-//   createProduct,
-//   updateProduct,
-//   deleteProduct
-// } = require('../controllers/product.controller');
-
-// router.get('/', getAllProducts);
-// router.post('/', createProduct);
-// router.put('/:id', updateProduct);
-// router.delete('/:id', deleteProduct);
-
-// module.exports = router;
 const express = require("express");
 const router = express.Router();
 const {
@@ -26,10 +11,10 @@ const {
   getCameraById,
   getHardwareById,
   getSoftwareById,
+  getHighlightedProducts, // thêm dòng này
 } = require("../controllers/product.controller");
 
-
-// Lấy tất cả sản phẩm
+// Tất cả sản phẩm
 router.get("/", getAllProducts);
 
 // Cameras
@@ -39,6 +24,7 @@ router.get("/camera/:id", getCameraById);
 // Hardwares
 router.get("/hardwares", getAllHardwares);
 router.get("/hardware/:id", getHardwareById);
+
 // Softwares
 router.get("/softwares", getAllSoftwares);
 router.get("/software/:id", getSoftwareById);
@@ -51,5 +37,8 @@ router.put("/:id", updateProduct);
 
 // Xóa sản phẩm
 router.delete("/:id", deleteProduct);
+
+// Sản phẩm nổi bật
+router.get("/highlighted", getHighlightedProducts);
 
 module.exports = router;

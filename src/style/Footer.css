@@ -1,5 +1,95 @@
-footer {
-  padding: 20px;
-  background: #222;
-  color: #fff;
+.site-footer {
+  background-color: var(--color-surface);
+  color: #111;
+  padding: 40px 20px 20px;
+  font-family: "Segoe UI", sans-serif;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.3s;
 }
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1280px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+.footer-section {
+  flex: 1 1 220px;
+  min-width: 200px;
+}
+.footer-about {
+  margin-right: 100px;
+}
+.footer-logo img {
+  width: 250px;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.footer-section h4 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+  color: #0066cc;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.social-icons a {
+  color: #444;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #0066cc;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 0.9rem;
+  color: #555;
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
