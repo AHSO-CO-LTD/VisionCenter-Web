@@ -1,16 +1,23 @@
 /* Header */
 .glass-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+
   padding: var(--padding) calc(var(--padding) * 2);
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(200, 200, 200, 0.2);
   box-shadow: var(--shadow-md);
-  border-radius: 0 0 var(--radius-md) var(--radius-md);
+
   z-index: 10;
   background-color: var(--color-surface);
+}
+.header-container {
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  width: 1280px;
+  margin: 0 auto;
 }
 
 /* Brand */
@@ -39,7 +46,7 @@
   transition: color 0.3s ease;
 }
 .nav-item::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -4px;
@@ -82,16 +89,22 @@
   top: 120%;
   right: 0;
   width: 210px;
-  background: rgba(255,255,255,0.95);
-  border: 1px solid rgba(200,200,200,0.2);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(200, 200, 200, 0.2);
   border-radius: var(--radius-md);
   padding: calc(var(--padding) / 1.5);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   animation: fadeInUp 0.25s ease;
 }
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .dropdown-header {
   font-weight: 600;
@@ -125,6 +138,10 @@
 
 /* Responsive: collapse center menu into burger on mobile */
 @media (max-width: 768px) {
-  .header-center { display: none; }
-  .burger-menu { display: block; /* bạn thêm icon burger */ }
+  .header-center {
+    display: none;
+  }
+  .burger-menu {
+    display: block; /* bạn thêm icon burger */
+  }
 }

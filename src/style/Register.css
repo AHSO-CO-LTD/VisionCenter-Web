@@ -1,0 +1,94 @@
+/* General Container */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, #0066b3, #003d73);
+  background-attachment: fixed;
+}
+
+/* Register Box */
+.form-register {
+  background: #fff;
+  padding: 20px 40px;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 550px;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-register:hover {
+  transform: scale(1.02);
+}
+
+/* Heading */
+.form-register h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  color: #0066b3;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Input Fields */
+.form-register input {
+  width: 100%;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f1f1f1;
+  font-size: 1rem;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.form-register input:focus {
+  outline: none;
+  border-color: #0066b3;
+  box-shadow: 0 0 8px rgba(0, 108, 142, 0.3);
+}
+
+/* Button */
+.form-register button {
+  width: 40%;
+  padding: 15px;
+  background: linear-gradient(to right, #0066b3, #003d73);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: 20px;
+  box-shadow: 0 5px 20px rgba(0, 108, 142, 0.1);
+  transition: all 0.3s ease;
+}
+
+.form-register button:hover {
+  background-color: #004f66;
+}
+
+.form-register button:active {
+  background-color: #003545;
+}
+
+/* Bottom text */
+.form-register p {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.form-register a {
+  color: #0066b3;
+  text-decoration: none;
+}
+
+.form-register a:hover {
+  text-decoration: underline;
+}

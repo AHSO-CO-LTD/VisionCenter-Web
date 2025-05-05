@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
 import { useAuth } from "../context/AuthContext";
+import "../style/Login.css";
 import API from "../utils/api";
 
 export default function LoginPage() {
@@ -20,10 +21,9 @@ export default function LoginPage() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      login(user); // cập nhật context
+      login(user);
       toast.success("Đăng nhập thành công!");
 
-      // Phân quyền điều hướng theo vai trò
       if (user.role === "admin") {
         navigate("/admin");
       } else {
@@ -37,28 +37,52 @@ export default function LoginPage() {
 
   return (
     <PageWrapper>
-      <div className="form-container">
-        <form onSubmit={handleLogin} className="form-login">
+      <div className="login-container">
+        <div className="login-box">
+          <div className="logo-container">
+            <img
+              src="/assets/logo/VISION CENTER LOGOMAIN LOGO - HORIZONTAL.png"
+              alt="Logo"
+              className="logo"
+            />
+          </div>
           <h2>Đăng nhập</h2>
-          <input
-            value={email}
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-          />
-          <input
-            value={password}
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Mật khẩu"
-            required
-          />
-          <button type="submit">Đăng nhập</button>
-          <p>
-            Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
-          </p>
-        </form>
+          <form onSubmit={handleLogin} className="login-form">
+            <input
+              value={email}
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              className="login-input"
+              required
+            />
+            <input
+              value={password}
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Mật khẩu"
+              className="login-input"
+              required
+            />
+            <div className="login-bottom-links">
+              <Link to="/register" className="login-link">
+                Chưa có tài khoản? Đăng ký ngay
+              </Link>
+            </div>
+            <div className="login-actions">
+              <Link to="/forgot-password" className="forgot-password-btn">
+                Quên mật khẩu?
+              </Link>
+              <button type="submit" className="login-btn">
+                Đăng nhập
+              </button>
+            </div>
+
+            <Link to="/" className="home-link">
+              Trang chủ
+            </Link>
+          </form>
+        </div>
       </div>
     </PageWrapper>
   );
