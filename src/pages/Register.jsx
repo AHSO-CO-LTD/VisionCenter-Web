@@ -145,6 +145,8 @@ import PageWrapper from "../components/PageWrapper";
 import "../style/Register.css";
 import API from "../utils/api";
 
+// ... phần import giữ nguyên ...
+
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -154,12 +156,13 @@ export default function RegisterPage() {
   const [emailReadyForRegister, setEmailReadyForRegister] = useState(false);
   const [loading, setLoading] = useState(false);
   const [emailVerified, setEmailVerified] = useState(false);
-  const [isCodeSent, setIsCodeSent] = useState(false); // Trạng thái kiểm tra xem mã xác thực đã được gửi hay chưa
+  const [isCodeSent, setIsCodeSent] = useState(false);
 
   const navigate = useNavigate();
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+  // Bước 1: Kiểm tra email đã tồn tại
   const handleCheckEmail = async (e) => {
     e.preventDefault();
     if (!validateEmail(email)) {
@@ -170,74 +173,75 @@ export default function RegisterPage() {
     setLoading(true);
     try {
       const res = await API.post("/auth/check-email", { email });
-      toast.success("Đã gửi mã khôi phục! Vui lòng kiểm tra email.");
+      if (res.data.exists) {
+        toast.error("Email đã tồn tại!");
+      } else {
+        toast.success("Email hợp lệ, đang gửi mã xác minh...");
+        const codeSent = await handleSendVerificationCode(); // Gửi mã xác minh
+        if (codeSent) {
+          setIsCodeSent(true);
+          setEmailReadyForRegister(true);
+        }
+      }
     } catch (error) {
-       if (
-         error.response &&
-         error.response.data &&
-         error.response.data.message
-       ) {
-         toast.error(error.response.data.message);
-       } else {
-         toast.error("Lỗi khi gửi yêu cầu. Vui lòng thử lại!");
-       }
+      toast.error("Lỗi kiểm tra email!");
     } finally {
       setLoading(false);
     }
   };
 
+  // Bước 2: Gửi mã xác minh email
   const handleSendVerificationCode = async () => {
-    setLoading(true);
     try {
       const res = await API.post("/auth/send-verification-code", { email });
-      toast.success("Mã xác thực đã được gửi về email!");
-      return true; // Trả về true nếu gửi thành công
+      toast.success("Mã xác thực đã được gửi!");
+      return true;
     } catch (err) {
-      toast.error("Không thể gửi mã xác minh!");
-      return false; // Trả về false nếu gửi thất bại
-    } finally {
-      setLoading(false);
+      toast.error("Không thể gửi mã xác thực!");
+      return false;
     }
   };
 
+  // Bước 3: Xác minh mã
   const handleVerifyCode = async () => {
     try {
-      const res = await API.post("/auth/verify-code", {
+      const res = await API.post("/auth/verify-email-code", {
         email,
         code: verificationCode,
       });
-      if (res.data.success) {
-        toast.success("Email đã được xác thực!");
+
+      if (res.data.valid) {
+        // <- sửa chỗ này
+        toast.success("Xác minh thành công!");
         setEmailVerified(true);
-        setEmailReadyForRegister(true);
       } else {
-        toast.error("Mã xác thực không đúng!");
+        toast.error("Mã xác minh không chính xác!");
       }
     } catch (err) {
       toast.error("Lỗi khi xác minh mã!");
     }
   };
 
+  // Bước 4: Đăng ký tài khoản
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (!emailReadyForRegister) {
-      toast.error("Vui lòng kiểm tra email trước khi đăng ký!");
+    if (!emailVerified) {
+      toast.error("Vui lòng xác minh email trước!");
       return;
     }
 
     if (password !== confirmPassword) {
-      toast.error("Mật khẩu xác nhận không khớp!");
+      toast.error("Mật khẩu không khớp!");
       return;
     }
 
     try {
       await API.post("/auth/register", { username, email, password });
-      toast.success("Đăng ký thành công, vui lòng đăng nhập!");
+      toast.success("Đăng ký thành công!");
       navigate("/login");
     } catch (error) {
-      toast.error("Lỗi khi đăng ký, vui lòng thử lại!");
-      console.error(error);
+      toast.error("Lỗi khi đăng ký!");
     }
   };
 
@@ -254,7 +258,7 @@ export default function RegisterPage() {
           </div>
           <h2>Đăng ký</h2>
 
-          {/* Giai đoạn 1: nhập email và username */}
+          {/* Bước 1: nhập email + tên đăng nhập */}
           {!emailReadyForRegister && (
             <>
               <input
@@ -263,31 +267,24 @@ export default function RegisterPage() {
                 placeholder="Tên đăng nhập"
                 required
               />
-              <div
-                style={{ display: "flex", flexDirection: "column", gap: "8px" }}
+              <input
+                value={email}
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                required
+              />
+              <button
+                type="button"
+                onClick={handleCheckEmail}
+                disabled={loading}
               >
-                <input
-                  value={email}
-                  type="email"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setEmailReadyForRegister(false);
-                  }}
-                  placeholder="Email"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={handleCheckEmail}
-                  disabled={loading}
-                >
-                  {loading ? "Đang kiểm tra..." : "Tiếp tục"}
-                </button>
-              </div>
+                {loading ? "Đang xử lý..." : "Tiếp tục"}
+              </button>
             </>
           )}
 
-          {/* Giai đoạn 2: nhập mã xác thực */}
+          {/* Bước 2: xác minh mã */}
           {emailReadyForRegister && !emailVerified && isCodeSent && (
             <>
               <input
@@ -301,19 +298,19 @@ export default function RegisterPage() {
             </>
           )}
 
-          {/* Giai đoạn 3: nhập mật khẩu */}
+          {/* Bước 3: nhập mật khẩu và xác nhận */}
           {emailVerified && (
             <>
               <input
-                value={password}
                 type="password"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Mật khẩu"
                 required
               />
               <input
-                value={confirmPassword}
                 type="password"
+                value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Xác nhận mật khẩu"
                 required
@@ -323,7 +320,7 @@ export default function RegisterPage() {
           )}
 
           <p>
-            Đã có tài khoản? <Link to="/login">Đăng nhập ngay</Link>
+            Đã có tài khoản? <Link to="/login">Đăng nhập</Link>
           </p>
         </form>
       </div>

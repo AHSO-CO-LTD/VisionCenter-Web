@@ -7,6 +7,7 @@ import API from "../utils/api";
 function Cart() {
   const { user } = useAuth();
   const [cart, setCart] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   useEffect(() => {
     if (user && user.id) {
@@ -35,6 +36,50 @@ function Cart() {
     }
   };
 
+  const handleSelectItem = (id) => {
+    setSelectedItems((prev) =>
+      prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]
+    );
+  };
+
+  const totalSelected = cart
+    .filter((item) => selectedItems.includes(item.id))
+    .reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const handleOrder = () => {
+    if (selectedItems.length === 0) {
+      alert("Vui lòng chọn ít nhất một sản phẩm để đặt hàng.");
+      return;
+    }
+
+    const selectedProducts = cart.filter((item) =>
+      selectedItems.includes(item.id)
+    );
+
+    const payload = {
+      user_id: user.id,
+      items: selectedProducts.map((item) => ({
+        product_id: item.product_id,
+        product_type: item.product_type,
+        name: item.name,
+        avartar: item.avartar,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+    };
+    console.log(payload);
+    API.post("/orders/", payload)
+      .then(() => {
+        alert("Đặt hàng thành công!");
+        setSelectedItems([]);
+        fetchCart(); // cập nhật lại giỏ hàng
+      })
+      .catch((err) => {
+        console.error("Lỗi khi đặt hàng:", err);
+        alert("Đặt hàng thất bại. Vui lòng thử lại.");
+      });
+  };
+
   return (
     <PageWrapper>
       <div className="cart-container">
@@ -45,6 +90,12 @@ function Cart() {
           <div className="cart-list">
             {cart.map((item) => (
               <div key={item.id} className="cart-item">
+                <input
+                  type="checkbox"
+                  checked={selectedItems.includes(item.id)}
+                  onChange={() => handleSelectItem(item.id)}
+                  className="cart-item-checkbox"
+                />
                 <img
                   src={item.avartar}
                   alt={item.name}
@@ -71,10 +122,20 @@ function Cart() {
                   className="cart-item-delete"
                   onClick={() => handleDeleteItem(item.id)}
                 >
-                  Delete
+                  Xoá
                 </button>
               </div>
             ))}
+            <p className="cart-total">
+              Tổng tiền: {totalSelected.toLocaleString()}đ
+            </p>
+            <button
+              className="order-button"
+              onClick={handleOrder}
+              disabled={selectedItems.length === 0}
+            >
+              Đặt hàng ({selectedItems.length})
+            </button>
           </div>
         )}
       </div>

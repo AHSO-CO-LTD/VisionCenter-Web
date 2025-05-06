@@ -147,13 +147,21 @@ exports.resetPassword = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+
+
+
+
+
+
 // Gửi mã xác minh khi đăng ký
 exports.sendVerificationCode = async (req, res) => {
   const { email } = req.body;
   try {
     const exists = await User.isEmailExist(email);
-    if (!exists)
-      return res.status(404).json({ message: "Email đã được đăng ký." });
+   if (exists)
+     return res.status(409).json({ message: "Email đã được đăng ký." });
+
 
     const code = Math.floor(100000 + Math.random() * 900000).toString(); //Mã 6 số
     const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // Hết hạn sau 10 phút
@@ -216,12 +224,13 @@ exports.sendVerificationCode = async (req, res) => {
 exports.verifyRegisterCode = async (req, res) => {
   const { email, code } = req.body;
   try {
-    const isValid = await User.verifyRegisterCode(email, code); // Tương tự verifyResetCode
+    const isValid = await User.verifyRegisterCode(email, code);
     res.json({ valid: isValid });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
 exports.completeRegister = async (req, res) => {
   const { username, email, password } = req.body;
   try {

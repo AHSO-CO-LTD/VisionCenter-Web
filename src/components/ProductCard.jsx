@@ -14,13 +14,16 @@ export default function ProductCard({ product }) {
       navigate("/login");
       return;
     }
-
+    // console.log(product);
     try {
       await API.post("/cart", {
         user_id: user.id,
         product_id: product.id,
         product_type: product.type,
         quantity: 1,
+        name: product.name,
+        avartar: product.avartar,
+        price: product.price,
       });
       addToCart(product);
     } catch (error) {

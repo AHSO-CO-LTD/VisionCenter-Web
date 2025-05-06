@@ -116,7 +116,8 @@ const User = {
     );
   },
 
-  async getVerificationCodeByEmail(email, code) {
+  async verifyRegisterCode(email, code) {
+    
     const [rows] = await db.execute(
       `SELECT * FROM email_verifications
        WHERE email = ? AND code = ? AND expires_at > NOW()

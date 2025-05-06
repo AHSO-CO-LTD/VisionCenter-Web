@@ -1,5 +1,5 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../style/Header.css";
@@ -7,12 +7,33 @@ import "../style/Header.css";
 export default function Header() {
   const { user, logout } = useAuth();
   const [showMenu, setShowMenu] = useState(false);
+  // Thêm state:
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchRef = useRef(null);
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     navigate("/");
   };
+  // Toggle ô tìm kiếm
+  const toggleSearch = () => {
+    setShowSearch(!showSearch);
+  };
+  // Click ngoài ô tìm kiếm thì ẩn
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSearch(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className="glass-header">
@@ -20,8 +41,11 @@ export default function Header() {
         {/* Left: Logo */}
         <div className="header-left">
           <Link to="/" className="brand">
-            <img src="/logo192.png" alt="logo" className="logo-icon" />
-            <span>Vision Center</span>
+            <img
+              src="/assets/logo/VISION CENTER LOGOMAIN LOGO - HORIZONTAL.png"
+              alt="logo"
+              className="logo-icon"
+            />
           </Link>
         </div>
 
@@ -43,15 +67,31 @@ export default function Header() {
 
         {/* Right: Icons */}
         <div className="header-right">
-          <Link to="/search" className="nav-icon">
-            <i className="fas fa-search"></i>
-          </Link>
+          <div className="search-area" ref={searchRef}>
+            <i className="fas fa-search nav-icon" onClick={toggleSearch}></i>
+
+            <div className={`search-box ${showSearch ? "open" : ""}`}>
+              <input
+                type="text"
+                placeholder="Tìm kiếm sản phẩm..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button onClick={() => console.log("Tìm kiếm:", searchQuery)}>
+                <i className="fas fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
           <Link to="/cart" className="nav-icon">
             <i className="fas fa-shopping-cart"></i>
           </Link>
 
           {user ? (
-            <div className="user-area">
+            <div
+              className={`user-area ${showMenu ? "active" : ""}`}
+              onClick={() => setShowMenu(!showMenu)}
+            >
               <div
                 className="user-icon-wrapper"
                 onClick={() => setShowMenu(!showMenu)}

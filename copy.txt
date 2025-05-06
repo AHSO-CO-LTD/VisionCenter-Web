@@ -1,293 +1,52 @@
-
-
-// module.exports = User;
 const db = require("../config/db");
 
-const User = {
-  // Lấy toàn bộ người dùng
-  async getAll() {
-    return db.execute("SELECT * FROM users");
-  },
-
-  // Tạo người dùng mới
-  async create({ username, email, password }) {
-    return db.execute(
-      "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 'user')",
-      [username, email, password]
+const OrderModel = {
+  // Lưu đơn hàng
+  async createOrder(userId, items) {
+    const totalAmount = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    
+    // Tạo đơn hàng mới
+    const [order] = await db.query(
+      "INSERT INTO orders (user_id, total_amount) VALUES (?, ?)",
+      [userId, totalAmount]
     );
-  },
 
-  // Cập nhật người dùng
-  async update(id, { username, email, password, role }) {
-    return db.execute(
-      "UPDATE users SET username=?, email=?, password=?, role=? WHERE id=?",
-      [username, email, password, role, id]
-    );
-  },
+    // Thêm các sản phẩm vào đơn hàng
+    for (const item of items) {
+      await db.query(
+        "INSERT INTO order_items (order_id, product_id, product_type, name, price, quantity, avartar) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [order.insertId, item.productId, item.productType, item.name, item.price, item.quantity, item.avartar]
+      );
+    }
 
-  // Tìm người dùng theo email
-  async findByEmail(email) {
-    const [rows] = await db.execute("SELECT * FROM users WHERE email = ?", [
-      email,
-    ]);
-    return rows[0];
-  },
-
-  // Kiểm tra email có tồn tại
-  async isEmailExist(email) {
-    const [rows] = await db.execute(
-      "SELECT 1 FROM users WHERE email = ? LIMIT 1",
-      [email]
-    );
-    return rows.length > 0;
-  },
-
-  // Tìm người dùng theo ID
-  async findById(id) {
-    const [rows] = await db.execute("SELECT * FROM users WHERE id = ?", [id]);
-    return rows[0];
-  },
-
-  // Xoá người dùng
-  async remove(id) {
-    return db.execute("DELETE FROM users WHERE id=?", [id]);
-  },
-
-  // Lưu mã xác thực (nếu bạn muốn lưu vào DB, nên có bảng reset_codes riêng)
-  async saveResetCode(email, code) {
-    // Chỉ ví dụ: bạn cần có bảng `reset_codes (email, code, expires_at)`
-    return db.execute(
-      "REPLACE INTO reset_codes (email, code, expires_at) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL 15 MINUTE))",
-      [email, code]
-    );
-  },
-
-  async insertResetCode(email, code, expiresAt) {
-    // Xoá mã cũ cùng email (nếu có)
-    await db.execute("DELETE FROM password_reset_codes WHERE email = ?", [
-      email,
-    ]);
-
-    // Thêm mã mới
-    return db.execute(
-      "INSERT INTO password_reset_codes (email, code, expires_at) VALUES (?, ?, ?)",
-      [email, code, expiresAt]
-    );
-  },
-
-  async verifyResetCode(email, code) {
-    const [rows] = await db.execute(
-      `SELECT * FROM password_reset_codes
-     WHERE email = ? AND code = ? AND expires_at > NOW()
-     ORDER BY created_at DESC
-     LIMIT 1`,
-      [email, code]
-    );
-    return rows[0];
-  },
-  async deleteResetCode(email) {
-    return db.execute("DELETE FROM password_reset_codes WHERE email = ?", [
-      email,
-    ]);
-  },
-
-  // Xóa các mã hết hạn
-  async deleteResetCodeExpired() {
-    return db.execute(
-      "DELETE FROM password_reset_codes WHERE expires_at < NOW()"
-    );
-  },
-
-  // Đổi mật khẩu (sử dụng khi mã xác thực hợp lệ)
-  async updatePasswordByEmail(email, newPassword) {
-    return db.execute("UPDATE users SET password = ? WHERE email = ?", [
-      newPassword,
-      email,
-    ]);
-  },
-};
-
-module.exports = User;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/user.model");
-const nodemailer = require("nodemailer");
-
-// Gửi mail với Gmail
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "trieuth.yame@gmail.com", // Thay bằng email thật
-    pass: "hotrieu123", // Lưu ý: dùng App Password, không dùng mật khẩu thường
-  },
-});
-
-exports.register = async (req, res) => {
-  const { username, email, password } = req.body;
-  try {
-    const hashed = await bcrypt.hash(password, 10);
-    await User.create({ username, email, password: hashed });
-    res.json({ message: "Đăng ký thành công" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    return order.insertId; // Trả về ID của đơn hàng mới tạo
   }
 };
 
-exports.login = async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    const user = await User.findByEmail(email);
-    if (!user)
-      return res.status(401).json({ message: "Tài khoản không tồn tại" });
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json({ message: "Sai mật khẩu" });
-
-    const token = jwt.sign(
-      { id: user.id, role: user.role },
-      "your_secret_key",
-      { expiresIn: "1d" }
-    );
-
-    res.json({
-      token,
-      user: { id: user.id, username: user.username, role: user.role },
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-exports.checkEmail = async (req, res) => {
-  const { email } = req.body;
-  try {
-    const exists = await User.isEmailExist(email);
-    res.json({ exists });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
-
-// Quên mật khẩu - gửi mã 6 số
-exports.forgotPassword = async (req, res) => {
-  const { email } = req.body;
-
-  try {
-    const user = await User.findByEmail(email);
-    if (!user) return res.status(404).json({ message: "Email không tồn tại." });
-
-    const code = Math.floor(100000 + Math.random() * 900000).toString(); // mã 6 số
-    const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // hết hạn sau 10 phút
-
-    await User.insertResetCode(email, code, expiresAt);
-
-    // Cấu hình email
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "trieuth.yame@gmail.com",
-        pass: "easm nyle asbr vces", // App Password 16 ký tự
-      },
-    });
-
-const mailOptions = {
-  from: "trieuth.yame@gmail.com",
-  to: email,
-  subject: "Mã khôi phục mật khẩu",
-  html: `
-  <div style="font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f0f2f5; padding: 40px 0;">
-    <div style="max-width: 600px; margin: auto; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 16px rgba(0,0,0,0.08);">
-
-      <!-- Header với logo -->
-      <div style="background-color: #003366; padding: 24px; text-align: center;">
-        <img src="https://i.imgur.com/MsZm7EG.png" alt="Logo" style="height: 60px; border-radius: 7px;" />
-      </div>
-
-      <!-- Nội dung chính -->
-      <div style="padding: 36px 40px;">
-        <h2 style="color: #003366; margin-bottom: 20px;">🔐 Khôi phục mật khẩu</h2>
-        <p style="font-size: 15px; color: #333333;">Xin chào,</p>
-        <p style="font-size: 15px; color: #333333; line-height: 1.6;">
-          Bạn (hoặc ai đó) đã yêu cầu khôi phục mật khẩu cho tài khoản của bạn. Vui lòng sử dụng mã dưới đây để hoàn tất quy trình:
-        </p>
-
-        <!-- Mã khôi phục -->
-        <div style="background-color: #0066b3; padding: 24px; margin: 30px 0; text-align: center; border-radius: 8px; border: 1px solid #cbd6e2;">
-          <p style="font-size: 18px; margin-bottom: 12px; color: #ffffff;">Mã khôi phục của bạn:</p>
-          <p style="font-size: 32px; font-weight: bold; color: #ffffff;">${code}</p>
-        </div>
-
-        <p style="font-size: 14px; color: #666;">
-          <strong>Lưu ý:</strong> Mã chỉ có hiệu lực trong vòng <strong>10 phút</strong>. Nếu bạn không thực hiện yêu cầu này, vui lòng bỏ qua email.
-        </p>
-
-        <p style="margin-top: 40px; font-size: 14px; color: #333;">Trân trọng,<br>Đội ngũ hỗ trợ</p>
-      </div>
-
-      <!-- Footer -->
-      <div style="background-color: #f0f0f0; text-align: center; padding: 16px; font-size: 12px; color: #999;">
-        © ${new Date().getFullYear()} VisionCenter. All rights reserved.
-      </div>
-    </div>
-  </div>
-  `,
-};
+module.exports = OrderModel;
 
 
-    await transporter.sendMail(mailOptions);
 
-    res.json({ message: "Mã khôi phục đã được gửi đến email." });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
 
-// Xác thực mã
-exports.verifyCode = async (req, res) => {
-  const { email, code } = req.body;
-  try {
-    const isValid = await User.verifyResetCode(email, code);
-    res.json({ valid: isValid });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
+CREATE TABLE orders (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  total_price DECIMAL(10,2) NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  status VARCHAR(50) DEFAULT 'pending'
+);
 
-// Đổi mật khẩu sau khi xác thực
-exports.resetPassword = async (req, res) => {
-  const { email, newPassword } = req.body;
-  try {
-    const hashed = await bcrypt.hash(newPassword, 10);
-    await User.updatePasswordByEmail(email, hashed);
-    res.json({ message: "Đổi mật khẩu thành công" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
+CREATE TABLE order_items (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  order_id INT NOT NULL,
+  product_type VARCHAR(50) NOT NULL, -- 'camera', 'hardware', 'software'
+  product_id INT NOT NULL,
+  name VARCHAR(255) NOT NULL,         -- Tên sản phẩm tại thời điểm đặt
+  avartar VARCHAR(255),               -- Ảnh sản phẩm
+  quantity INT NOT NULL,
+  price DECIMAL(10,2) NOT NULL,       -- Giá tại thời điểm đặt
+  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+);
+
+
+

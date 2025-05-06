@@ -1,9 +1,10 @@
 import PageWrapper from "../components/PageWrapper";
+import "../style/Checkout.css"
 
 export default function Checkout() {
   return (
     <PageWrapper>
-      <div>
+      <div className="glass-checkout">
         <h2>💳 Thanh toán</h2>
         <form>
           <div className="form-group">

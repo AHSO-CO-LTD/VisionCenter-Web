@@ -3,7 +3,7 @@ const Cart = require("../models/cart.model");
 exports.getCartByUserId = async (req, res) => {
   try {
     const userId = req.params.userId;
-   
+
     const rows = await Cart.getCartByUserId(userId);
     res.json(rows);
   } catch (err) {
@@ -13,15 +13,32 @@ exports.getCartByUserId = async (req, res) => {
 };
 
 exports.addToCart = async (req, res) => {
-  const { user_id, product_id, product_type, quantity } = req.body;
+  const { user_id, product_id, product_type, quantity, name, avartar, price } =
+    req.body;
   try {
     const rows = await Cart.findCartItem(user_id, product_id, product_type);
 
     if (rows.length > 0) {
-      await Cart.addQuantity(user_id, product_id, product_type, quantity);
+      await Cart.addQuantity(
+        user_id,
+        product_id,
+        product_type,
+        quantity,
+        name,
+        avartar,
+        price
+      );
       res.json({ message: "Cập nhật số lượng giỏ hàng" });
     } else {
-      await Cart.insertItem(user_id, product_id, product_type, quantity);
+      await Cart.insertItem(
+        user_id,
+        product_id,
+        product_type,
+        quantity,
+        name,
+        avartar,
+        price
+      );
       res.json({ message: "Thêm vào giỏ hàng thành công" });
     }
   } catch (err) {

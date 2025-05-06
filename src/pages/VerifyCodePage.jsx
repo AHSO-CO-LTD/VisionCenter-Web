@@ -22,7 +22,7 @@ export default function VerifyCodePage() {
     if (!code) return toast.error("Vui lòng nhập mã");
 
     try {
-      const res = await API.post("/auth/verify-code", { email, code });
+      const res = await API.post("/auth/verify-reset-code", { email, code });
       toast.success("Mã hợp lệ! Vui lòng nhập mật khẩu mới.");
       navigate("/reset-password", { state: { email, code } });
     } catch (err) {
