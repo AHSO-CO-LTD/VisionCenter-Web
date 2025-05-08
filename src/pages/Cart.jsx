@@ -46,28 +46,20 @@ function Cart() {
     .filter((item) => selectedItems.includes(item.id))
     .reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  
   const handleOrder = () => {
     if (selectedItems.length === 0) {
       alert("Vui lòng chọn ít nhất một sản phẩm để đặt hàng.");
       return;
     }
 
-    const selectedProducts = cart.filter((item) =>
-      selectedItems.includes(item.id)
-    );
-
     const payload = {
       user_id: user.id,
-      items: selectedProducts.map((item) => ({
-        product_id: item.product_id,
-        product_type: item.product_type,
-        name: item.name,
-        avartar: item.avartar,
-        quantity: item.quantity,
-        price: item.price,
-      })),
+      item_ids: selectedItems,
     };
-    console.log(payload);
+
+
+
     API.post("/orders/", payload)
       .then(() => {
         alert("Đặt hàng thành công!");

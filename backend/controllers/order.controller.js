@@ -1,7 +1,8 @@
-const OrderModel = require("../models/order.model");
-const CartModel = require("../models/cart.model");
+const Order = require("../models/order.model");
+const Cart = require("../models/cart.model");
 
-const createOrder = async (req, res) => {
+// Tạo đơn hàng
+exports.createOrder = async (req, res) => {
   const { user_id, item_ids } = req.body;
 
   if (
@@ -15,7 +16,7 @@ const createOrder = async (req, res) => {
 
   try {
     // Lấy thông tin sản phẩm từ giỏ hàng
-    const cartItems = await CartModel.getCartByUserId(user_id);
+    const cartItems = await Cart.getCartByUserId(user_id);
     const selectedItems = cartItems.filter((item) =>
       item_ids.includes(item.id)
     );
@@ -33,12 +34,12 @@ const createOrder = async (req, res) => {
     );
 
     // Tạo đơn hàng
-    const [orderResult] = await OrderModel.createOrder(user_id, total);
+    const [orderResult] = await Order.createOrder(user_id, total);
     const order_id = orderResult.insertId;
 
-    // Thêm từng sản phẩm vào bảng order_items
+    // Lưu từng sản phẩm vào bảng order_items và xóa khỏi giỏ hàng
     for (const item of selectedItems) {
-      await OrderModel.addOrderItem({
+      await Order.addOrderItem({
         order_id,
         product_type: item.product_type,
         product_id: item.product_id,
@@ -48,17 +49,12 @@ const createOrder = async (req, res) => {
         price: item.price,
       });
 
-      // Xoá sản phẩm khỏi giỏ hàng
-      await CartModel.delete(item.id);
+      await Cart.delete(item.id); // Xóa khỏi giỏ hàng
     }
 
     res.status(201).json({ message: "Đặt hàng thành công", order_id });
-  } catch (error) {
-    console.error("Lỗi khi tạo đơn hàng:", error);
+  } catch (err) {
+    console.error("❌ Lỗi khi tạo đơn hàng:", err);
     res.status(500).json({ message: "Đã xảy ra lỗi khi đặt hàng" });
   }
-};
-
-module.exports = {
-  createOrder,
 };

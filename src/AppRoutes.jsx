@@ -5,23 +5,24 @@ import UserLayout from "./layouts/UserLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import ManagerProduct from "./pages/admin/ManagerProduct";
 import ManagerUser from "./pages/admin/ManagerUser";
+import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
+import VerifyCodePage from "./pages/auth/VerifyCodePage";
 import Contact from "./pages/Contact";
 import Cameras from "./pages/products/Cameras";
 import Hardwares from "./pages/products/Hardwares";
 import ProductDetail from "./pages/products/ProductDetail";
 import Softwares from "./pages/products/Softwares";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
 import Solutions from "./pages/Solutions";
 import Support from "./pages/Support";
-import VerifyCodePage from "./pages/VerifyCodePage";
 
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
-import ForgotPassword from "./pages/ForgotPassword";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
 import ProductList from "./pages/products/ProductCategory";
-import Register from "./pages/Register";
+import Profield from "./pages/Profield";
 
 function AppRoutes() {
   const location = useLocation();
@@ -71,6 +72,8 @@ function AppRoutes() {
         <Route path="/products" element={<ProductList />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        {/* Thông tin các nhân */}
+        <Route path="/profield" element={<Profield/>}></Route>
         {/* Danh mục sản phẩm */}
         <Route path="/product/cameras" element={<Cameras />}></Route>
         <Route path="/product/hardwares" element={<Hardwares />}></Route>

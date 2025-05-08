@@ -16,10 +16,47 @@ const User = {
   },
 
   // Cập nhật người dùng
-  async update({ id, username, email, password, role }) {
+  // Cập nhật người dùng (đã sửa)
+  async update({
+    id,
+    username,
+    email,
+    password,
+    full_name,
+    phone,
+    address,
+    avatar,
+    role,
+    birthday,
+    gender,
+  }) {
     return db.execute(
-      "UPDATE users SET username = ?, email = ?, password = ?, role = ? WHERE id = ?",
-      [username, email, password, role, id]
+      `UPDATE users 
+     SET 
+       username = ?, 
+       email = ?, 
+       password = ?, 
+       full_name = ?, 
+       phone = ?, 
+       address = ?, 
+       avatar = ?, 
+       role = ?, 
+       birthday = ?, 
+       gender = ? 
+     WHERE id = ?`,
+      [
+        username ?? null,
+        email ?? null,
+        password ?? null,
+        full_name ?? null,
+        phone ?? null,
+        address ?? null,
+        avatar ?? null,
+        role ?? null,
+        birthday ?? null,
+        gender ?? null,
+        id,
+      ]
     );
   },
 
@@ -31,8 +68,8 @@ const User = {
     return rows[0];
   },
 
-  // Tìm người dùng theo ID
-  async findById(id) {
+  // Lấy thông tin người dùng
+  async getProfield(id) {
     const [rows] = await db.execute("SELECT * FROM users WHERE id = ?", [id]);
     return rows[0];
   },
@@ -117,7 +154,6 @@ const User = {
   },
 
   async verifyRegisterCode(email, code) {
-    
     const [rows] = await db.execute(
       `SELECT * FROM email_verifications
        WHERE email = ? AND code = ? AND expires_at > NOW()
@@ -136,6 +172,3 @@ const User = {
 };
 
 module.exports = User;
-
-
-

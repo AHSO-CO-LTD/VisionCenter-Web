@@ -9,12 +9,16 @@ const cartRoutes = require("./routes/cart.routes");
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes");
 const orderRoutes = require("./routes/order.routes");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
+// Serve image
+// app.use("/api/uploads", express.static(path.join(__dirname, "uploads")));
+// Products
 app.use("/api/products", productRoutes);
 // Cart
 app.use("/api/cart", cartRoutes);

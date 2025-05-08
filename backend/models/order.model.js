@@ -3,7 +3,7 @@ const db = require("../config/db");
 const OrderModel = {
   // Tạo đơn hàng mới
   async createOrder(user_id, total) {
-    const sql = "INSERT INTO orders (user_id, total) VALUES (?, ?)";
+    const sql = "INSERT INTO orders (user_id, total_price) VALUES (?, ?)";
     return db.query(sql, [user_id, total]);
   },
 
