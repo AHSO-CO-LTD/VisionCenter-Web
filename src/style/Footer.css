@@ -1,12 +1,13 @@
 .site-footer {
-  background-color: var(--color-surface);
-  color: #111;
+  background-color: rgb(255, 255, 255);
+  color: white;
   padding: 20px 20px 20px;
   font-family: "Segoe UI", sans-serif;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 1s ease forwards;
   animation-delay: 0.3s;
+    background: linear-gradient(to left, #004080, #0072c6);
 }
 
 .footer-container {
@@ -35,7 +36,6 @@
 .footer-section h4 {
   font-size: 1.1rem;
   margin-bottom: 12px;
-  color: #333;
 }
 
 .footer-section ul {
@@ -48,13 +48,14 @@
 }
 
 .footer-section ul li a {
-  color: #333;
+  /* color: #333; */
+  color: white;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer-section ul li a:hover {
-  color: #0066cc;
+  color: #aeceee;
 }
 
 .social-icons {
@@ -64,20 +65,19 @@
 }
 
 .social-icons a {
-  color: #444;
+color: white;
   font-size: 1.2rem;
   transition: color 0.3s;
 }
 
 .social-icons a:hover {
-  color: #0066cc;
+  color: #9dc8f3;
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 20px;
   font-size: 0.9rem;
-  color: #555;
   border-top: 1px solid #ddd;
   margin-top: 20px;
 }

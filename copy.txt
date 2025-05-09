@@ -1,40 +1,44 @@
-exports.updateUser = async (req, res) => {
-  const { id } = req.params;
-  const {
-    username,
-    email,
-    password,
-    full_name,
-    phone,
-    address,
-    avatar,
-    role,
-    birthday,
-    gender,
-  } = req.body;
+<img
+  src={
+    typeof formData.avatar === "string" && formData.avatar.startsWith("/uploads")
+      ? `http://localhost:8000/api${formData.avatar}`
+      : formData.avatar
+  }
+  alt="Avatar"
+  className="profile-avatar"
+/>
 
-  const sanitize = (value) => (value === undefined ? null : value);
 
-  const avatarFromFile = req.file ? `/uploads/${req.file.filename}` : undefined;
 
+
+
+
+
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
   try {
-    await User.update({
-      id: parseInt(id),
-      username: sanitize(username),
-      email: sanitize(email),
-      password: sanitize(password),
-      full_name: sanitize(full_name),
-      phone: sanitize(phone),
-      address: sanitize(address),
-      avatar: sanitize(avatarFromFile || avatar), // 👈 Ưu tiên file upload
-      role: sanitize(role),
-      birthday: sanitize(birthday),
-      gender: sanitize(gender),
+    const data = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value !== null && value !== undefined) {
+        // Xử lý ngày sinh khi gửi lên server
+        if (key === "birthday") {
+          const dateOnly = moment(value).tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD'); // Đảm bảo gửi múi giờ chính xác
+          data.append(key, dateOnly);
+        } else {
+          data.append(key, value);
+        }
+      }
     });
 
-    res.json({ message: "Cập nhật thành công." });
+    await API.put(`/user/${user.id}`, data, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    toast.success("Cập nhật thành công.");
   } catch (error) {
-    console.error("Lỗi cập nhật người dùng:", error.message);
-    res.status(500).json({ error: "Lỗi cập nhật người dùng." });
+    console.error(error);
+    toast.error("Cập nhật thất bại!");
   }
 };
+

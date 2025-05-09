@@ -1,30 +1,31 @@
+/* Profield.css */
+
 .profile-wrapper {
   display: flex;
   justify-content: center;
-  padding: 40px 20px;
-  background-color: #f9fafb;
-  color: linear-gradient(to right, #004080, #0072c6);
-  margin-top: 67px;
+  padding: 20px 20px;
+  background: #f7f9fc;
+  min-height: 80vh;
+  font-family: "Segoe UI", sans-serif;
+
 }
 
 .profile-card {
   display: flex;
-  flex-direction: row;
-  gap: 30px;
-  max-width: 1000px;
-  width: 100%;
+  width: 900px;
   background: white;
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  padding: 30px;
 }
 
 .left-column {
   flex: 1;
-  text-align: center;
-  border-right: 1px solid #eee;
-  padding-right: 20px;
+  background: linear-gradient(to right, #004080, #0072c6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
 }
 
 .profile-avatar {
@@ -32,30 +33,35 @@
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #007bff;
-  margin-bottom: 15px;
+  border: 6px solid white;
+  box-shadow: 0 0 20px rgba(132, 149, 169, 0.4);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
 }
 
-.avatar-input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+.profile-avatar:hover {
+  transform: scale(1.05);
+}
+
+input[type="file"] {
   margin-top: 10px;
 }
 
 .right-column {
   flex: 2;
+  padding: 40px;
+  background-color: white;
 }
 
-.right-column h2 {
-  margin-bottom: 20px;
-  color: linear-gradient(to right, #004080, #0072c6);
+h2 {
+  margin-bottom: 30px;
+  color: linear-gradient(to right, #0066b3, #003d73);
+  font-weight: 600;
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
@@ -65,33 +71,62 @@
 }
 
 .form-group label {
-  margin-bottom: 5px;
-  font-weight: 600;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #003d73;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.form-group input,
-.form-group textarea,
-.form-group select {
-  padding: 10px;
-  border-radius: 10px;
+input,
+select,
+textarea {
+  padding: 10px 12px;
   border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: rgba(132, 149, 169, 1);
+  box-shadow: 0 0 0 3px rgba(132, 149, 169, 0.2);
+}
+
+input[type="date"] {
+  appearance: none;
+  background: white;
+  position: relative;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(30%) sepia(30%) saturate(500%) hue-rotate(180deg);
+  cursor: pointer;
 }
 
 .full-width {
-  grid-column: span 2;
+  grid-column: 1 / 3;
 }
 
 .btn-save {
-  margin-top: 20px;
-  padding: 12px 25px;
-  background-color: linear-gradient(to right, #004080, #0072c6);
+  margin-top: 30px;
+  padding: 12px 24px;
+  background-color: #004080;
   color: white;
-  border-radius: 10px;
+  font-weight: bold;
   border: none;
+  border-radius: 14px;
   cursor: pointer;
-  transition: 0.3s ease;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .btn-save:hover {
-  background-color: #0056b3;
+  background-color: #0072c6;
 }

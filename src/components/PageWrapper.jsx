@@ -12,7 +12,7 @@ export default function PageWrapper({ children }) {
         stiffness: 100,
         damping: 20,
       }}
-      style={{ minHeight: "50vh" }}
+      style={{ minHeight: "50vh", marginTop: "67px"}}
     >
       {children}
     </motion.div>

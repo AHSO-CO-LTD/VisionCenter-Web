@@ -7,6 +7,7 @@ import {
   FaTwitter,
 } from "react-icons/fa";
 import "../style/Footer.css";
+import { color } from "framer-motion";
 
 export default function Footer() {
   return (
@@ -74,7 +75,7 @@ export default function Footer() {
         <div className="footer-section footer-contact">
           <h4>Liên hệ</h4>
           <p>
-            Email: <a href="mailto:support@myshop.vn">support@myshop.vn</a>
+            Email: <a href="mailto:support@myshop.vn" style={{color: "white"}}>support@myshop.vn</a>
           </p>
           <p>Địa chỉ: 123 Đường Công Nghệ, Quận 1, TP. HCM</p>
           <div className="social-icons">

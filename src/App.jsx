@@ -1,7 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import { BrowserRouter as Router } from "react-router-dom";
-import { CartProvider } from "./context/CartContext";
 import AppRoutes from "../src/AppRoutes"; // 👈 file mới chứa tất cả Routes
+import { CartProvider } from "./context/CartContext";
 import "./style/App.css";
 
 function App() {

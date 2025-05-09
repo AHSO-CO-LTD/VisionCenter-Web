@@ -18,7 +18,7 @@ html {
   align-items: center;
   justify-content: center;
   overflow: visible;
-   margin-top: 67px;
+  
 }
 
 .hero-content {
@@ -168,9 +168,6 @@ html {
   color: #1e2a38;
   margin-top: 16px;
 }
-
-
-
 
 .highlight-grid {
   display: grid;

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import AdminLayout from "./layouts/AdminLayout";
@@ -15,16 +16,20 @@ import Softwares from "./pages/products/Softwares";
 import Solutions from "./pages/Solutions";
 import Support from "./pages/Support";
 
+import ForgotPassword from "./pages/auth/ForgotPassword";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
-import ForgotPassword from "./pages/auth/ForgotPassword";
 import Home from "./pages/Home";
 import ProductList from "./pages/products/ProductCategory";
 import Profield from "./pages/Profield";
 
 function AppRoutes() {
+  // Cuộng về đầu trang
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
   const location = useLocation();
   const isAuthPage = [
     "/login",
@@ -73,7 +78,7 @@ function AppRoutes() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         {/* Thông tin các nhân */}
-        <Route path="/profield" element={<Profield/>}></Route>
+        <Route path="/profield" element={<Profield />}></Route>
         {/* Danh mục sản phẩm */}
         <Route path="/product/cameras" element={<Cameras />}></Route>
         <Route path="/product/hardwares" element={<Hardwares />}></Route>

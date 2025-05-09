@@ -27,7 +27,7 @@ function Cart() {
       .then(() => fetchCart())
       .catch((err) => console.error("Lỗi khi cập nhật số lượng:", err));
   };
-
+ 
   const handleDeleteItem = (id) => {
     if (window.confirm("Bạn có chắc muốn xoá sản phẩm này khỏi giỏ hàng?")) {
       API.delete(`/cart/${id}`)
