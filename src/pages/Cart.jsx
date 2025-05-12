@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PageWrapper from "../components/PageWrapper";
 import { useAuth } from "../context/AuthContext";
 import "../style/Cart.css";
@@ -8,6 +9,7 @@ function Cart() {
   const { user } = useAuth();
   const [cart, setCart] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user && user.id) {
@@ -27,7 +29,7 @@ function Cart() {
       .then(() => fetchCart())
       .catch((err) => console.error("Lỗi khi cập nhật số lượng:", err));
   };
- 
+
   const handleDeleteItem = (id) => {
     if (window.confirm("Bạn có chắc muốn xoá sản phẩm này khỏi giỏ hàng?")) {
       API.delete(`/cart/${id}`)
@@ -46,7 +48,6 @@ function Cart() {
     .filter((item) => selectedItems.includes(item.id))
     .reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  
   const handleOrder = () => {
     if (selectedItems.length === 0) {
       alert("Vui lòng chọn ít nhất một sản phẩm để đặt hàng.");
@@ -58,13 +59,16 @@ function Cart() {
       item_ids: selectedItems,
     };
 
-
-
     API.post("/orders/", payload)
-      .then(() => {
-        alert("Đặt hàng thành công!");
+      .then((res) => {
+        const orderId = res.data.order_id;
+        console.log(orderId);
+        // alert("Đặt hàng thành công!");
         setSelectedItems([]);
+        // Chuyển hướng sang thông tin đơn hàng
+        navigate(`/order/${orderId}/info`);
         fetchCart(); // cập nhật lại giỏ hàng
+        //
       })
       .catch((err) => {
         console.error("Lỗi khi đặt hàng:", err);
@@ -89,7 +93,7 @@ function Cart() {
                   className="cart-item-checkbox"
                 />
                 <img
-                  src={item.avartar}
+                  src={item.avatar}
                   alt={item.name}
                   className="cart-item-image"
                 />

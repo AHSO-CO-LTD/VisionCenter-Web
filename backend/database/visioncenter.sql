@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 07, 2025 lúc 06:30 AM
+-- Thời gian đã tạo: Th5 09, 2025 lúc 12:05 PM
 -- Phiên bản máy phục vụ: 9.2.0
 -- Phiên bản PHP: 8.2.12
 
@@ -91,7 +91,8 @@ INSERT INTO `cart` (`id`, `user_id`, `product_id`, `product_type`, `quantity`, `
 (60, 29, 1, 'camera', 1, 'Basler acA2440-35um', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/5nmVf84JdJIEUhrINFe3Lo/00860bb76b2ae5770aaa3aed9158c21d/109477_a2A2048-114ucpro_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 1049),
 (62, 34, 1, 'camera', 1, NULL, NULL, NULL),
 (63, 35, 2, 'camera', 1, 'Basler a2A1920-160umPRO', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/1bAOfmFSDOTW6F66iQ2JKT/03253cd2ec13b7bf3fb00d50404e806b/109486_a2A5060-22g5mbas_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 1399),
-(64, 35, 3, 'camera', 1, 'Basler boost baA4096-72cc', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/1tvtqBYbfjvjYJ3V7bTwip/6d96478c6c179f006eb665b1a498eb5a/109485_a2A5060-4gcbas_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 2999);
+(64, 35, 3, 'camera', 1, 'Basler boost baA4096-72cc', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/1tvtqBYbfjvjYJ3V7bTwip/6d96478c6c179f006eb665b1a498eb5a/109485_a2A5060-4gcbas_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 2999),
+(67, 3, 3, 'camera', 1, 'Basler boost baA4096-72cc', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/1tvtqBYbfjvjYJ3V7bTwip/6d96478c6c179f006eb665b1a498eb5a/109485_a2A5060-4gcbas_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 2999);
 
 -- --------------------------------------------------------
 
@@ -157,7 +158,9 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `user_id`, `total_price`, `create_at`, `status`) VALUES
 (1, 29, 3497.00, '2025-05-06 22:54:02', 'pending'),
-(2, 29, 1799.00, '2025-05-06 22:57:12', 'pending');
+(2, 29, 1799.00, '2025-05-06 22:57:12', 'pending'),
+(3, 3, 2448.00, '2025-05-08 10:06:18', 'pending'),
+(4, 2, 3497.00, '2025-05-09 15:10:05', 'pending');
 
 -- --------------------------------------------------------
 
@@ -183,7 +186,11 @@ CREATE TABLE `order_items` (
 INSERT INTO `order_items` (`id`, `order_id`, `product_type`, `product_id`, `name`, `avartar`, `quantity`, `price`) VALUES
 (1, 1, 'camera', 1, 'Basler acA2440-35um', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/5nmVf84JdJIEUhrINFe3Lo/00860bb76b2ae5770aaa3aed9158c21d/109477_a2A2048-114ucpro_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 2, 1049.00),
 (2, 1, 'camera', 2, 'Basler a2A1920-160umPRO', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/1bAOfmFSDOTW6F66iQ2JKT/03253cd2ec13b7bf3fb00d50404e806b/109486_a2A5060-22g5mbas_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 1, 1399.00),
-(3, 2, 'camera', 4, 'Basler pilot piA2400-17gm', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/2ZxrLD5ZoYaUhNpEcs6KqR/b19cba6064b47d4013e979a5bf131c72/109484_a2A5060-4gmbas_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 1, 1799.00);
+(3, 2, 'camera', 4, 'Basler pilot piA2400-17gm', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/2ZxrLD5ZoYaUhNpEcs6KqR/b19cba6064b47d4013e979a5bf131c72/109484_a2A5060-4gmbas_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 1, 1799.00),
+(4, 3, 'camera', 1, 'Basler acA2440-35um', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/5nmVf84JdJIEUhrINFe3Lo/00860bb76b2ae5770aaa3aed9158c21d/109477_a2A2048-114ucpro_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 1, 1049.00),
+(5, 3, 'camera', 2, 'Basler a2A1920-160umPRO', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/1bAOfmFSDOTW6F66iQ2JKT/03253cd2ec13b7bf3fb00d50404e806b/109486_a2A5060-22g5mbas_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 1, 1399.00),
+(6, 4, 'camera', 1, 'Basler acA2440-35um', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/5nmVf84JdJIEUhrINFe3Lo/00860bb76b2ae5770aaa3aed9158c21d/109477_a2A2048-114ucpro_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 2, 1049.00),
+(7, 4, 'camera', 2, 'Basler a2A1920-160umPRO', 'https://images-ctf.baslerweb.com/dg51pdwahxgw/1bAOfmFSDOTW6F66iQ2JKT/03253cd2ec13b7bf3fb00d50404e806b/109486_a2A5060-22g5mbas_area-scan-camera_01.webp?fm=webp&f=center&w=800&h=600&q=80&fit=pad', 1, 1399.00);
 
 -- --------------------------------------------------------
 
@@ -280,8 +287,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `full_name`, `phone`, `address`, `avatar`, `role`, `is_verified`, `created_at`, `updated_at`, `birthday`, `gender`) VALUES
 (1, 'admin', 'admin@gmail.com', '$2b$10$PHo4PZ2iagcIEMLwVMAnFu8UluBfZ5sTBUrBULIP8e7FrAV9WzUxu', NULL, NULL, NULL, NULL, 'admin', 0, '2025-05-07 02:04:58', '2025-05-07 02:04:58', NULL, NULL),
-(2, 'trieu', 'tranhotrieu20122002@gmail.com', '$2b$10$a1YGnabCzzPCc5/xy5N2Le.hGLT3dUS15jH3JHKOTwSFEoF2LBxG2', NULL, NULL, NULL, NULL, 'user', 0, '2025-05-07 02:06:03', '2025-05-07 02:08:50', NULL, NULL),
-(3, 'th', 'trieuth.yame@gmail.com', '$2b$10$kB5nzXnbQK9ipiv4pfdfsuXlPKT/EXrg4gURE78qzkf2q6UG.Dzb.', NULL, NULL, NULL, NULL, 'user', 0, '2025-05-07 04:02:17', '2025-05-07 04:02:17', NULL, NULL);
+(2, 'trieu', 'tranhotrieu20122002@gmail.com', '$2b$10$a1YGnabCzzPCc5/xy5N2Le.hGLT3dUS15jH3JHKOTwSFEoF2LBxG2', 'Trieu', '334340937', '22/1C Bùi Thị Cội, khu phố Đông An, phường Tân Đông Hiệp', '/uploads/avatar-1746756571045-972864415.png', 'user', 0, '2025-05-07 02:06:03', '2025-05-09 02:28:21', '2020-11-05', 'male'),
+(4, 'helllo', 'trieuth.yame@gmail.com', '$2b$10$wm8Z9/lrlNjACGqEY5PXMu1I7YL1vuGxT/LUUy3tO.wdwf/g.Un.6', 'Trieu Ne', '334340937', '22/1C Bùi Thị Cội, khu phố Đông An, phường Tân Đông Hiệp', '/uploads/avatar-1746699020986-890995877.png', 'user', 0, '2025-05-08 09:29:04', '2025-05-08 10:10:20', NULL, 'male');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -363,13 +370,13 @@ ALTER TABLE `cameras`
 -- AUTO_INCREMENT cho bảng `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT cho bảng `email_verifications`
 --
 ALTER TABLE `email_verifications`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `hardwares`
@@ -381,13 +388,13 @@ ALTER TABLE `hardwares`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `password_reset_codes`
@@ -411,7 +418,7 @@ ALTER TABLE `softwares`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -427,3 +434,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+`

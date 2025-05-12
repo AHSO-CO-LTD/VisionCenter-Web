@@ -21,7 +21,7 @@ export default function ManagerUser() {
       .then((res) => setUsers(res.data))
       .catch((err) => console.error(err));
   };
-
+  
   const handleDelete = (id) => {
     if (window.confirm("Bạn có chắc muốn xoá người dùng này?")) {
       API.delete(`/user/${id}`)

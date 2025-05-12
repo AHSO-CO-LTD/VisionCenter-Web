@@ -51,7 +51,7 @@ export default function Header() {
 
         {/* Center: Main navigation */}
         <div className="header-center">
-          <Link to="/products" className="nav-item">
+          <Link to="/categorys" className="nav-item">
             Sản phẩm
           </Link>
           <Link to="/solutions" className="nav-item">

@@ -58,3 +58,38 @@ exports.createOrder = async (req, res) => {
     res.status(500).json({ message: "Đã xảy ra lỗi khi đặt hàng" });
   }
 };
+// Lấy thông tin chi tiết đơn hàng
+exports.getOrderInfo = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Lấy thông tin đơn hàng + người dùng
+    const orderInfo = await Order.getOrderWithUser(id);
+    if (!orderInfo) {
+      return res.status(404).json({ message: "Không tìm thấy đơn hàng." });
+    }
+
+    // Lấy danh sách sản phẩm trong đơn hàng
+    const items = await Order.getOrderItems(id);
+
+    res.status(200).json({
+      order: {
+        id: orderInfo.order_id,
+        total_price: orderInfo.total_price,
+        status: orderInfo.status,
+        created_at: orderInfo.create_at,
+      },
+      user: {
+        id: orderInfo.user_id,
+        name: orderInfo.user_name,
+        email: orderInfo.user_email,
+        phone: orderInfo.user_phone,
+        address: orderInfo.user_address,
+      },
+      items,
+    });
+  } catch (err) {
+    console.error("❌ Lỗi khi lấy thông tin đơn hàng:", err);
+    res.status(500).json({ message: "Đã xảy ra lỗi khi truy xuất đơn hàng" });
+  }
+};

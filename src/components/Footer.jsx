@@ -32,13 +32,13 @@ export default function Footer() {
           <h4>Liên kết nhanh</h4>
           <ul>
             <li>
-              <a href="#">Trang chủ</a>
+              <a href="/">Trang chủ</a>
             </li>
             <li>
-              <a href="#">Sản phẩm</a>
+              <a href="/categorys">Sản phẩm</a>
             </li>
             <li>
-              <a href="#">Giải pháp</a>
+              <a href="/solutions">Giải pháp</a>
             </li>
             <li>
               <a href="#">Tải xuống</a>
@@ -60,7 +60,7 @@ export default function Footer() {
               <a href="#">FAQs</a>
             </li>
             <li>
-              <a href="#">Liên hệ hỗ trợ</a>
+              <a href="/support">Liên hệ hỗ trợ</a>
             </li>
             <li>
               <a href="#">Điều khoản dịch vụ</a>
@@ -75,7 +75,10 @@ export default function Footer() {
         <div className="footer-section footer-contact">
           <h4>Liên hệ</h4>
           <p>
-            Email: <a href="mailto:support@myshop.vn" style={{color: "white"}}>support@myshop.vn</a>
+            Email:{" "}
+            <a href="mailto:support@myshop.vn" style={{ color: "white" }}>
+              support@myshop.vn
+            </a>
           </p>
           <p>Địa chỉ: 123 Đường Công Nghệ, Quận 1, TP. HCM</p>
           <div className="social-icons">

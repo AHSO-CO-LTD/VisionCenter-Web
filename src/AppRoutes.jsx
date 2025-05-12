@@ -15,6 +15,7 @@ import ProductDetail from "./pages/products/ProductDetail";
 import Softwares from "./pages/products/Softwares";
 import Solutions from "./pages/Solutions";
 import Support from "./pages/Support";
+import OrderInfor from "./pages/OrderInfor";
 
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import Login from "./pages/auth/Login";
@@ -74,7 +75,7 @@ function AppRoutes() {
     <UserLayout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<ProductList />} />
+        <Route path="/categorys" element={<ProductList />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         {/* Thông tin các nhân */}
@@ -91,6 +92,8 @@ function AppRoutes() {
         <Route path="/support" element={<Support />}></Route>
         {/* Liên hệ */}
         <Route path="/contact" element={<Contact />}></Route>
+        {/* Thông tin đơn hàng */}
+        <Route path="/order/:orderId/info" element={<OrderInfor/>}></Route>
       </Routes>
     </UserLayout>
   );
