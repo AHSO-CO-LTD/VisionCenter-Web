@@ -1,0 +1,83 @@
+.user-form {
+  background: #f9fafc;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.user-form h3 {
+  grid-column: 1 / -1;
+  font-size: 20px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.user-form input,
+.user-form select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dcdfe3;
+  font-size: 14px;
+  background: #fff;
+}
+
+.user-form button {
+  grid-column: 1 / -1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #3498db;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.user-form button:hover {
+  background-color: #2980b9;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-table th,
+.user-table td {
+  padding: 12px 10px;
+  text-align: center;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.user-table th {
+  background-color: #f1f3f6;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.user-table img {
+  border-radius: 50%;
+}
+
+.user-table button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0 5px;
+  font-size: 18px;
+  color: #555;
+  transition: color 0.2s;
+}
+
+.user-table button:hover {
+  color: #e74c3c;
+}

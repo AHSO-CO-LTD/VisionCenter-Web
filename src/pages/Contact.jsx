@@ -12,6 +12,27 @@ export default function Contact() {
             Nếu bạn có bất kỳ câu hỏi hoặc yêu cầu nào, vui lòng liên hệ với
             chúng tôi qua thông tin dưới đây hoặc điền vào biểu mẫu.
           </p>
+
+          {/* Light streak */}
+          <div className="light-streak"></div>
+
+          {/* Sparkles */}
+          <div
+            className="sparkle"
+            style={{ top: "40%", left: "25%", animationDelay: "0s" }}
+          ></div>
+          <div
+            className="sparkle"
+            style={{ top: "60%", left: "70%", animationDelay: "1.3s" }}
+          ></div>
+          <div
+            className="sparkle"
+            style={{ top: "35%", left: "80%", animationDelay: "2.7s" }}
+          ></div>
+          <div
+            className="sparkle"
+            style={{ top: "50%", left: "15%", animationDelay: "1.8s" }}
+          ></div>
         </header>
 
         {/* Thông tin liên hệ */}

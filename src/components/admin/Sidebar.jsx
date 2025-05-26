@@ -38,7 +38,7 @@ export default function Sidebar() {
 
 const styles = {
   sidebar: {
-    width: 250,
+    width: 200,
     position: "fixed",
     top: 0,
     left: 0,

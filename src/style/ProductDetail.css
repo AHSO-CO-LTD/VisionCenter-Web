@@ -1,101 +1,98 @@
-/* ProductDetail.css */
 .product-detail-container {
-  display: grid;
-  grid-template-columns: 1fr 2fr; /* Cột 1 cho ảnh, cột 2 cho thông tin */
-  gap: 40px;
-  margin-top: 30px;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 20px;
-   margin-top: 75px;
-}
+   display: flex;
+   gap: 3rem;
+   padding: 50px;
 
-.product-detail-image {
-  display: flex;
-
-  flex-direction: column;
-  position: relative; /* Cho phép positioning ảnh thứ hai mà không làm ảnh hưởng đến ảnh 1 */
-}
-
-.product-detail-image img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.product-detail-image .product-detail-image-2 {
-  width: 150px;
-  height: 150px;
-  object-fit: contain; /* Giữ tỷ lệ ảnh */
-}
-
-.product-detail-image img:hover {
-  transform: scale(1.05);
-}
-
-.product-detail-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.product-detail-name {
-  font-size: 24px; /* Giảm kích thước font */
-  font-weight: bold;
-  color: #34495e;
-  margin-bottom: 8px;
-}
-
-.product-detail-price {
-  font-size: 20px; /* Giảm kích thước font */
-  color: #e67e22;
-  margin-bottom: 15px;
-}
-
-.product-detail-description {
-  font-size: 14px; /* Giảm kích thước chữ */
-  color: #7f8c8d;
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-
-.product-detail-details {
-  margin-top: 15px;
-}
-
-.product-detail-details p {
-  font-size: 14px; /* Giảm kích thước chữ */
-  color: #34495e;
-  margin-bottom: 8px;
-}
-
-.product-detail-add-to-cart-btn {
-  padding: 12px 22px;
-  font-size: 16px; /* Giảm kích thước chữ */
-  color: white;
-  background-color: #3498db;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  margin-top: 20px;
-  width: 100%;
-}
-
-.product-detail-add-to-cart-btn:hover {
-  background-color: #2980b9;
-  transform: translateY(-3px);
-}
-
-.product-detail-add-to-cart-btn:active {
-  transform: translateY(0);
-}
+   color: #004080;
+   border-radius: 20px;
+   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+   animation: slideIn 0.6s ease-in-out;
+   flex-wrap: wrap;
+ }
+ 
+ @keyframes slideIn {
+   from {
+     opacity: 0;
+     transform: translateY(40px);
+   }
+   to {
+     opacity: 1;
+     transform: translateY(0);
+   }
+ }
+ 
+ .product-detail-image {
+   flex: 1;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+ 
+ .product-detail-image img {
+   max-width: 450px;
+   width: 100%;
+   border-radius: 20px;
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+   transition: transform 0.3s ease;
+ }
+ .product-detail-image img:hover {
+   transform: scale(1.05);
+ }
+ 
+ .product-detail-info {
+   flex: 1;
+   background: rgba(255, 255, 255, 0.1);
+   backdrop-filter: blur(8px);
+   border-radius: 20px;
+   padding: 30px;
+   transition: all 0.3s ease;
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+ }
+ 
+ .product-detail-name {
+   font-size: 32px;
+   font-weight: 700;
+   margin-bottom: 20px;
+   color: #004080;
+ }
+ 
+ .product-detail-price {
+   font-size: 24px;
+   font-weight: bold;
+   color: #ffd700;
+   margin-bottom: 20px;
+ }
+ 
+ .product-detail-description {
+   margin-bottom: 20px;
+   font-size: 17px;
+   color: #207edc;
+ }
+ 
+ .product-detail-details p {
+   margin: 10px 0;
+   border-left: 3px solid #ffd700;
+   padding-left: 10px;
+   font-size: 16px;
+ }
+ 
+ .product-detail-add-to-cart-btn {
+   margin-top: 30px;
+   padding: 15px 30px;
+   font-size: 16px;
+   background: #ffd700;
+   color: #004080;
+   font-weight: bold;
+   border: none;
+   border-radius: 50px;
+   cursor: pointer;
+   transition: 0.3s ease;
+   box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+ }
+ 
+ .product-detail-add-to-cart-btn:hover {
+   background: #fff;
+   color: #0072c6;
+   transform: translateY(-2px);
+ }
+ 

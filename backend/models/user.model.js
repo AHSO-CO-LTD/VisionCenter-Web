@@ -4,17 +4,28 @@ const User = {
   // Lấy toàn bộ người dùng
   async getAll() {
     const [rows] = await db.execute("SELECT * FROM users");
+
     return rows;
   },
 
   // Tạo người dùng mới (mặc định chưa xác thực email)
-  async create({ username, email, password }) {
+  async create({
+    username,
+    email,
+    password,
+  }) {
     return db.execute(
-      "INSERT INTO users (username, email, password, role, is_verified) VALUES (?, ?, ?, 'user', 0)",
-      [username, email, password]
+      `INSERT INTO users 
+       (username, email, password)
+       VALUES (?, ?, ?)`,
+      [
+        username,
+        email,
+        password,
+        
+      ]
     );
   },
-
   // Cập nhật người dùng
   // Cập nhật người dùng (đã sửa)
   async update({
@@ -30,6 +41,7 @@ const User = {
     birthday,
     gender,
   }) {
+    console.log(avatar);
     return db.execute(
       `UPDATE users 
      SET 

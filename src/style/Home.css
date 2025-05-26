@@ -11,224 +11,275 @@ html {
   background-color: #f8f9fc;
 }
 
+/* Fade-in Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.home-page {
+  padding: 0;
+  margin: 0;
+  margin-top: 67px;
+}
+.section {
+  padding: 70px 20px;
+  max-width: 1280px;
+  margin: auto;
+  text-align: center;
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+}
+
+.section.visible {
+  opacity: 1;
+}
+
+/* Gradient Heading */
+.section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  background: linear-gradient(to left, #004080, #0072c6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glowText 3s infinite alternate;
+}
+
+@keyframes glowText {
+  0% {
+    text-shadow: 0 0 5px #004080;
+  }
+  100% {
+    text-shadow: 0 0 20px #0072c6;
+  }
+}
+
+/* Hero Section */
 .hero {
-  background: linear-gradient(135deg, #f8f9fc, #e9efff);
+  background: linear-gradient(to left, #004080, #0072c6);
+  color: white;
   padding: 100px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
-  
+  text-align: center;
 }
 
 .hero-content {
   display: flex;
   flex-wrap: wrap;
-  max-width: 1400px;
-  width: 100%;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
   gap: 40px;
-}
-
-.text-box {
-  max-width: 600px;
+  animation: fadeInUp 1.2s ease;
 }
 
 .text-box h1 {
-  font-size: 2.8rem;
-  color: #1e2a4a;
-  font-weight: 700;
+  font-size: 3rem;
   margin-bottom: 20px;
-  display: inline-block;
-  animation: wave 3s ease-in-out infinite;
-}
-
-@keyframes wave {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(1deg);
-  }
-  75% {
-    transform: rotate(-1deg);
-  }
 }
 
 .text-box p {
   font-size: 1.2rem;
-  color: #555;
-  line-height: 1.6;
   margin-bottom: 30px;
 }
 
 .cta-button {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #246bfd;
-  color: white;
-  border-radius: 12px;
-  font-weight: 600;
+  background: white;
+  color: #004080;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 20px rgba(36, 107, 253, 0.3);
+  z-index: 1;
+}
+
+.cta-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: #004080;
+  z-index: -1;
+  transition: width 0.4s ease;
+  border-radius: 30px;
 }
 
 .cta-button:hover {
-  background-color: #174dd6;
-  transform: translateY(-2px);
+  color: white;
 }
-.image-box {
-  height: 500px;
+
+.cta-button:hover::after {
+  width: 100%;
 }
+
 .image-box img {
   width: 100%;
-  max-width: 700px;
-
-  height: 100%;
-  object-fit: contain;
+  max-width: 480px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-.section {
-  padding: 80px 20px;
-  text-align: center;
-  background-color: white;
-}
-
-.section h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #1e2a4a;
-}
-
-.section p {
-  font-size: 1.1rem;
-  color: #666;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
+/* Categories */
 .scroll-container {
   display: flex;
-  gap: 20px;
   overflow-x: auto;
-  padding: 10px 0;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  width: 80%; /* Giới hạn chiều rộng của container là 80% */
-  margin: 0 auto; /* Căn giữa container */
-  box-sizing: border-box; /* Đảm bảo tính toán đúng chiều rộng */
-}
-
-.scroll-container::-webkit-scrollbar {
-  display: none; /* Ẩn thanh cuộn ngang */
+  padding: 30px 0;
+  gap: 24px;
+  scroll-behavior: smooth;
+  justify-content: flex-start;
 }
 
 .category-card-home {
-  flex: 0 0 auto; /* Đảm bảo card không bị co lại */
-  min-width: 280px; /* Đảm bảo card không quá nhỏ */
-  max-width: 320px; /* Giới hạn chiều rộng tối đa */
-  height: 300px; /* Giữ chiều cao card hợp lý */
-  margin-right: 20px; /* Khoảng cách giữa các card */
-  background-color: white;
-  border-radius: 20px;
-  padding: 20px;
-  scroll-snap-align: center;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  border: 2px solid rgba(132, 149, 169, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex: 0 0 auto;
+  width: 260px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 64, 128, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border: 2px solid transparent;
 }
 
 .category-card-home:hover {
   transform: scale(1.05);
-  box-shadow: 0 15px 30px rgba(132, 149, 169, 0.2);
+  box-shadow: 0 12px 30px rgba(0, 114, 198, 0.3);
+  border-color: #0072c6;
 }
 
 .category-card-home img {
   width: 100%;
-  height: 200px; /* Giữ chiều cao ảnh phù hợp */
-  object-fit: cover; /* Giữ ảnh đầy card mà không bị biến dạng */
-  border-radius: 14px;
-  transition: transform 0.3s ease;
-}
-
-.category-card-home:hover img {
-  transform: scale(1.05);
+  height: 180px;
+  object-fit: cover;
 }
 
 .category-card-home span {
+  display: block;
+  padding: 16px;
   font-size: 1.1rem;
-  font-weight: 600;
-  color: #1e2a38;
-  margin-top: 16px;
+  font-weight: bold;
+  color: #004080;
 }
 
+
+
+
+/* Highlights */
 .highlight-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
   margin-top: 40px;
 }
 
 .highlight-card {
-  background: #fff;
-  padding: 24px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-  transition: 0.3s ease;
+  background: #e9f3fc;
+  padding: 20px;
+  border-radius: 14px;
+  border-left: 6px solid #0072c6;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .highlight-card:hover {
+  background: #d7eafd;
   transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
-.contact-cta {
-  background: linear-gradient(135deg, #dbe9ff, #f0f4ff);
-  padding: 60px 20px;
+.highlight-card::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to left, #004080, #0072c6);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
 }
 
+.highlight-card:hover::before {
+  transform: scaleX(1);
+}
+
+.highlight-card h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #004080;
+}
+
+/* Services */
+.service-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.service-box {
+  width: 180px;
+  height: 160px;
+  background: #f0f4f8;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.4s ease, background 0.4s ease;
+  box-shadow: 0 8px 18px rgba(0, 114, 198, 0.15);
+  cursor: pointer;
+}
+
+.service-box:hover {
+  background: #e1ecf8;
+  transform: translateY(-5px) rotateZ(-1deg);
+}
+
+.service-box h4 {
+  margin-top: 12px;
+  color: #004080;
+}
+
+/* Contact CTA */
 .contact-cta p {
-  font-size: 1.1rem;
-  margin-bottom: 20px;
+  margin: 10px 0 20px;
 }
 
 .contact-cta .cta-button {
-  animation: glow 2.5s ease-in-out infinite;
+  background: linear-gradient(to left, #004080, #0072c6);
+  color: white;
+  border-radius: 30px;
+  padding: 14px 30px;
+  font-size: 1rem;
+  transition: background 0.4s ease, transform 0.3s ease;
 }
 
-@keyframes glow {
-  0%,
-  100% {
-    box-shadow: 0 0 10px rgba(36, 107, 253, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(36, 107, 253, 0.6);
-  }
+.contact-cta .cta-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
 }
 
-/* Responsive Image */
+/* Responsive */
 @media (max-width: 768px) {
   .hero-content {
     flex-direction: column;
-    align-items: center;
+    text-align: center;
   }
 
-  .image-box img {
-    max-width: 90%;
+  .highlight-grid {
+    grid-template-columns: 1fr;
   }
 
-  .text-box h1 {
-    font-size: 2.2rem;
-  }
-
-  .text-box p {
-    font-size: 1rem;
+  .service-icons {
+    gap: 20px;
   }
 }

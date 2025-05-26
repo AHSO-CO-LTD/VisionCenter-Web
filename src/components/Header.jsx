@@ -1,16 +1,16 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../style/Header.css";
 
 export default function Header() {
   const { user, logout } = useAuth();
   const [showMenu, setShowMenu] = useState(false);
-  // Thêm state:
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef(null);
+  const location = useLocation(); // 👈 Lấy pathname hiện tại
 
   const navigate = useNavigate();
 
@@ -18,11 +18,11 @@ export default function Header() {
     logout();
     navigate("/");
   };
-  // Toggle ô tìm kiếm
+
   const toggleSearch = () => {
     setShowSearch(!showSearch);
   };
-  // Click ngoài ô tìm kiếm thì ẩn
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -51,16 +51,36 @@ export default function Header() {
 
         {/* Center: Main navigation */}
         <div className="header-center">
-          <Link to="/categorys" className="nav-item">
+          <Link
+            to="/categorys"
+            className={`nav-item ${
+              location.pathname === "/categorys" ? "active" : ""
+            }`}
+          >
             Sản phẩm
           </Link>
-          <Link to="/solutions" className="nav-item">
+          <Link
+            to="/solutions"
+            className={`nav-item ${
+              location.pathname === "/solutions" ? "active" : ""
+            }`}
+          >
             Giải pháp
           </Link>
-          <Link to="/support" className="nav-item">
+          <Link
+            to="/support"
+            className={`nav-item ${
+              location.pathname === "/support" ? "active" : ""
+            }`}
+          >
             Hỗ trợ
           </Link>
-          <Link to="/contact" className="nav-item">
+          <Link
+            to="/contact"
+            className={`nav-item ${
+              location.pathname === "/contact" ? "active" : ""
+            }`}
+          >
             Liên hệ
           </Link>
         </div>
@@ -69,7 +89,6 @@ export default function Header() {
         <div className="header-right">
           <div className="search-area" ref={searchRef}>
             <i className="fas fa-search nav-icon" onClick={toggleSearch}></i>
-
             <div className={`search-box ${showSearch ? "open" : ""}`}>
               <input
                 type="text"

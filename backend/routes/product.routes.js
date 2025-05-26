@@ -13,6 +13,7 @@ const {
   getSoftwareById,
   getHighlightedProducts, // thêm dòng này
 } = require("../controllers/product.controller");
+const upload = require("../middleware/upload");
 
 // Tất cả sản phẩm
 router.get("/", getAllProducts);
@@ -33,10 +34,10 @@ router.get("/software/:id", getSoftwareById);
 router.post("/", createProduct);
 
 // Cập nhật sản phẩm
-router.put("/:id", updateProduct);
+router.put("/:id", upload.single("avatar"), updateProduct);
 
 // Xóa sản phẩm
-router.delete("/:id", deleteProduct);
+router.delete("/:id/:type", deleteProduct);
 
 // Sản phẩm nổi bật
 router.get("/highlighted", getHighlightedProducts);

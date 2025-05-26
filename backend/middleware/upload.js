@@ -15,9 +15,9 @@ const storage = multer.diskStorage({
 
 // Chỉ nhận ảnh
 const fileFilter = (req, file, cb) => {
-  const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+  const allowedTypes = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
   if (allowedTypes.includes(file.mimetype)) cb(null, true);
-  else cb(new Error("Chỉ cho phép upload ảnh (jpg, jpeg, png)."), false);
+  else cb(new Error("Chỉ cho phép upload ảnh (jpg, jpeg, png, webp)."), false);
 };
 
 const upload = multer({ storage, fileFilter });

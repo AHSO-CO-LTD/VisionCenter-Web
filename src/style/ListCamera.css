@@ -1,0 +1,33 @@
+.cameras-page {
+  padding: 40px 30px;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.header-icon {
+  font-size: 2.2rem;
+  color: #003d73;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #003d73;
+  text-shadow: 1px 1px 0 #cfe0f7;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+}

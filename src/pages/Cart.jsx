@@ -93,7 +93,7 @@ function Cart() {
                   className="cart-item-checkbox"
                 />
                 <img
-                  src={item.avatar}
+                  src={`http://localhost:8000${item.avatar}`}
                   alt={item.name}
                   className="cart-item-image"
                 />

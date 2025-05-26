@@ -16,17 +16,17 @@ export default function AdminLayout({ children }) {
 const styles = {
   layout: {
     display: "flex",
-    height: "100vh",
   },
   content: {
-    marginLeft: 250, // Bên trái cho sidebar
+    marginLeft: 200, // Bên trái cho sidebar
     width: "100%",
     display: "flex",
     flexDirection: "column",
   },
   mainContent: {
-    padding: "2rem",
     backgroundColor: "#f9f9f9",
+    margin: "0",
+    padding: "0",
     flex: 1,
   },
 };

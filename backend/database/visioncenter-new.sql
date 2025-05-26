@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 12, 2025 lúc 11:46 AM
+-- Thời gian đã tạo: Th5 19, 2025 lúc 05:02 PM
 -- Phiên bản máy phục vụ: 9.2.0
 -- Phiên bản PHP: 8.2.12
 
@@ -41,8 +41,8 @@ CREATE TABLE `cameras` (
   `price` decimal(10,2) DEFAULT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `manufacturer` varchar(255) DEFAULT NULL,
-  `avartar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `avartar_2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `avatar_2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `product_id` int DEFAULT NULL
@@ -52,17 +52,17 @@ CREATE TABLE `cameras` (
 -- Đang đổ dữ liệu cho bảng `cameras`
 --
 
-INSERT INTO `cameras` (`id`, `name`, `model`, `series`, `sensor_type`, `resolution`, `fps`, `sensor_width`, `sensor_height`, `interface`, `price`, `description`, `manufacturer`, `avartar`, `avartar_2`, `type`, `created_at`, `product_id`) VALUES
-(1, 'Basler acA2440-35um', 'acA2440-35um', 'Basler Series', 'CMOS', '2440x2048', 35, 2440, 2048, 'GigE', 1000.00, 'Camera with high resolution', 'Basler', 'camera1.jpg', 'camera1_2.jpg', 'Camera', '2025-05-11 15:32:29', 1),
-(2, 'Basler a2A1920-160umPRO', 'a2A1920-160umPRO', 'Basler Series', 'CMOS', '1920x1080', 160, 1920, 1080, 'USB3', 1200.00, 'Professional camera for industrial use', 'Basler', 'camera2.jpg', 'camera2_2.jpg', 'Camera', '2025-05-11 15:32:29', 2),
-(3, 'Rasler boost baA4096-72cc', 'baA4096-72cc', 'Rasler Series', 'CMOS', '4096x4096', 72, 4096, 4096, 'Camera Link', 1500.00, 'High performance camera for research', 'Rasler', 'camera3.jpg', 'camera3_2.jpg', 'Camera', '2025-05-11 15:32:29', 3),
-(4, 'Jasler pilot piA2400-17gm', 'piA2400-17gm', 'Jasler Series', 'CCD', '2400x1800', 17, 2400, 1800, 'Ethernet', 800.00, 'Affordable camera for low light conditions', 'Jasler', 'camera4.jpg', 'camera4_2.jpg', 'Camera', '2025-05-11 15:32:29', 4),
-(5, 'Basler ace acA640-750um', 'acA640-750um', 'Basler Series', 'CMOS', '640x480', 750, 640, 480, 'USB3', 900.00, 'Camera for general purposes', 'Basler', 'camera5.jpg', 'camera5_2.jpg', 'Camera', '2025-05-11 15:32:29', 5),
-(6, 'Basler MED ace aMEDacA1920-50um', 'aMEDacA1920-50um', 'Basler Series', 'CMOS', '1920x1080', 50, 1920, 1080, 'USB3', 1100.00, 'Medical-grade camera for high precision', 'Basler', 'camera6.jpg', 'camera6_2.jpg', 'Camera', '2025-05-11 15:35:06', 6),
-(7, 'Basler ace 2 a2A5328-15ucBAS', 'a2A5328-15ucBAS', 'Basler Series', 'CMOS', '5328x4320', 15, 5328, 4320, 'GigE', 1600.00, 'Ultra high resolution camera', 'Basler', 'camera7.jpg', 'camera7_2.jpg', 'Camera', '2025-05-11 15:35:06', 7),
-(8, 'Basler racer raL4096-8gm', 'raL4096-8gm', 'Basler Series', 'CMOS', '4096x4096', 8, 4096, 4096, 'Camera Link', 1300.00, 'High-speed camera for motion analysis', 'Basler', 'camera8.jpg', 'camera8_2.jpg', 'Camera', '2025-05-11 15:35:06', 8),
-(9, 'Basler boost baA3072-72cc', 'baA3072-72cc', 'Basler Series', 'CMOS', '3072x2048', 72, 3072, 2048, 'USB3', 1200.00, 'High-speed camera for industrial use', 'Basler', 'camera9.jpg', 'camera9_2.jpg', 'Camera', '2025-05-11 15:35:06', 9),
-(10, 'Basler ace acA720-520uc', 'acA720-520uc', 'Basler Series', 'CMOS', '720x480', 520, 720, 480, 'USB3', 800.00, 'Camera for basic applications', 'Basler', 'camera10.jpg', 'camera10_2.jpg', 'Camera', '2025-05-11 15:35:06', 10);
+INSERT INTO `cameras` (`id`, `name`, `model`, `series`, `sensor_type`, `resolution`, `fps`, `sensor_width`, `sensor_height`, `interface`, `price`, `description`, `manufacturer`, `avatar`, `avatar_2`, `type`, `created_at`, `product_id`) VALUES
+(1, 'Basler acA2440-35um ', '1', '1', '1', 's', 1, 1, 1, '1', 1000.00, 'Camera with high resolution', '1', '/uploads/avatar-1747664864970-563464341.webp', 'camera1_2.jpg', 'Camera', '2025-05-11 15:32:29', 1),
+(2, 'Basler a2A1920-160umPROSSSS', 'a2A1920-160umPRO', 'Basler Series', 'CMOS', '1920x1080', 160, 1920, 1080, 'USB3', 1200.00, 'Professional camera for industrial use', 'Basler', '/uploads/avatar-1747664872116-355205790.webp', 'camera2_2.jpg', 'Camera', '2025-05-11 15:32:29', 2),
+(3, 'Rasler boost baA4096-72cc', 'baA4096-72cc', 'Rasler Series', 'CMOS', '4096x4096', 72, 4096, 4096, 'Camera Link', 1500.00, 'High performance camera for research', 'Rasler', '/uploads/avatar-1747664880058-577741426.webp', 'camera3_2.jpg', 'Camera', '2025-05-11 15:32:29', 3),
+(4, 'Jasler pilot piA2400-17gm', 'piA2400-17gm', 'Jasler Series', 'CCD', '2400x1800', 17, 2400, 1800, 'Ethernet', 800.00, 'Affordable camera for low light conditions', 'Jasler', '/uploads/avatar-1747664895944-186456072.webp', 'camera4_2.jpg', 'Camera', '2025-05-11 15:32:29', 4),
+(5, 'Basler ace acA640-750um', 'acA640-750um', 'Basler Series', 'CMOS', '640x480', 750, 640, 480, 'USB3', 900.00, 'Camera for general purposes', 'Basler', '/uploads/avatar-1747664904883-437814092.webp', 'camera5_2.jpg', 'Camera', '2025-05-11 15:32:29', 5),
+(6, 'Basler MED ace aMEDacA1920-50um', 'aMEDacA1920-50um', 'Basler Series', 'CMOS', '1920x1080', 50, 1920, 1080, 'USB3', 1100.00, 'Medical-grade camera for high precision', 'Basler', '/uploads/avatar-1747664914799-663226242.webp', 'camera6_2.jpg', 'Camera', '2025-05-11 15:35:06', 6),
+(7, 'Basler ace 2 a2A5328-15ucBAS', 'a2A5328-15ucBAS', 'Basler Series', 'CMOS', '5328x4320', 15, 5328, 4320, 'GigE', 1600.00, 'Ultra high resolution camera', 'Basler', '/uploads/avatar-1747664923012-869058493.webp', 'camera7_2.jpg', 'Camera', '2025-05-11 15:35:06', 7),
+(8, 'Basler racer raL4096-8gm', 'raL4096-8gm', 'Basler Series', 'CMOS', '4096x4096', 8, 4096, 4096, 'Camera Link', 1300.00, 'High-speed camera for motion analysis', 'Basler', '/uploads/avatar-1747664931318-304634837.webp', 'camera8_2.jpg', 'Camera', '2025-05-11 15:35:06', 8),
+(9, 'Basler boost baA3072-72cc', 'baA3072-72cc', 'Basler Series', 'CMOS', '3072x2048', 72, 3072, 2048, 'USB3', 1200.00, 'High-speed camera for industrial use', 'Basler', '/uploads/avatar-1747664940805-570864559.webp', 'camera9_2.jpg', 'Camera', '2025-05-11 15:35:06', 9),
+(10, 'Basler ace acA720-520uc', 'acA720-520uc', 'Basler Series', 'CMOS', '720x480', 520, 720, 480, 'USB3', 800.00, 'Camera for basic applications', 'Basler', '/uploads/avatar-1747664951476-929939889.webp', 'camera10_2.jpg', 'Camera', '2025-05-11 15:35:06', 10);
 
 -- --------------------------------------------------------
 
@@ -86,9 +86,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `product_id`, `product_type`, `quantity`, `name`, `avartar`, `price`) VALUES
-(109, 2, 6, 'Camera', 1, 'Basler MED ace aMEDacA1920-50um', 'camera6.jpg', 1100),
-(110, 2, 1, 'Software', 1, 'Microsoft Office 2021', 'office2021.jpg', 150),
-(111, 2, 1, 'Hardware', 1, 'Dell XPS 15 Laptop', 'laptop1.jpg', 2000);
+(112, 7, 6, 'Camera', 1, 'Basler MED ace aMEDacA1920-50um', NULL, 1100);
 
 -- --------------------------------------------------------
 
@@ -118,7 +116,7 @@ CREATE TABLE `hardwares` (
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `manufacturer` varchar(255) DEFAULT NULL,
   `warranty` varchar(100) DEFAULT NULL,
-  `avartar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `product_id` int DEFAULT NULL
@@ -128,12 +126,10 @@ CREATE TABLE `hardwares` (
 -- Đang đổ dữ liệu cho bảng `hardwares`
 --
 
-INSERT INTO `hardwares` (`id`, `name`, `model`, `price`, `description`, `manufacturer`, `warranty`, `avartar`, `type`, `created_at`, `product_id`) VALUES
+INSERT INTO `hardwares` (`id`, `name`, `model`, `price`, `description`, `manufacturer`, `warranty`, `avatar`, `type`, `created_at`, `product_id`) VALUES
 (1, 'Dell XPS 15 Laptop', 'XPS15-2022', 2000.00, 'Laptop with high processing power', 'Dell', '2 years', 'laptop1.jpg', 'Hardware', '2025-05-11 15:34:56', 11),
-(2, 'Asus ROG Strix Gaming Laptop', 'STRIX-GAMER', 2500.00, 'Gaming laptop with high performance', 'Asus', '1 year', 'laptop2.jpg', 'Hardware', '2025-05-11 15:34:56', 12),
 (3, 'Logitech MX Master 35', 'MXM35', 100.00, 'Wireless mouse for productivity', 'Logitech', '1 year', 'mouse1.jpg', 'Hardware', '2025-05-11 15:34:56', 13),
-(4, 'Corsair Vengeance RAM 32GB', 'CORS-VEN32GB', 150.00, '32GB DDR4 RAM for high performance', 'Corsair', '2 years', 'ram1.jpg', 'Hardware', '2025-05-11 15:34:56', 14),
-(5, 'Samsung 980 Pro SSD 1TB', 'SSD980Pro1TB', 180.00, 'High-speed SSD for gaming', 'Samsung', '5 years', 'ssd1.jpg', 'Hardware', '2025-05-11 15:34:56', 15);
+(4, 'Corsair Vengeance RAM 32GB', 'CORS-VEN32GB', 150.00, '32GB DDR4 RAM for high performance', 'Corsair', '2 years', 'ram1.jpg', 'Hardware', '2025-05-11 15:34:56', 14);
 
 -- --------------------------------------------------------
 
@@ -148,14 +144,6 @@ CREATE TABLE `orders` (
   `create_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `status` varchar(50) DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Đang đổ dữ liệu cho bảng `orders`
---
-
-INSERT INTO `orders` (`id`, `user_id`, `total_price`, `create_at`, `status`) VALUES
-(26, 2, 3300.00, '2025-05-12 16:14:16', 'pending'),
-(27, 2, 800.00, '2025-05-12 16:14:42', 'pending');
 
 -- --------------------------------------------------------
 
@@ -230,10 +218,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `product_type`) VALUES
-(1, 'Basler acA2440-35um', 'camera'),
-(2, 'Basler a2A1920-160umPRO', 'camera'),
-(3, 'Basler boost baA4096-72cc', 'camera'),
-(4, 'Basler pilot piA2400-17gm', 'camera'),
+(1, 'Dell XPS 15 Laptop', 'hardware'),
+(2, 'Basler a2A1920-160umPROSSSS', 'camera'),
+(3, 'Rasler boost baA4096-72cc', 'camera'),
+(4, 'AutoCAD 2025', 'software'),
 (5, 'Basler ace acA640-750um', 'camera'),
 (6, 'Basler MED ace aMEDacA1920-50um', 'camera'),
 (7, 'Basler ace 2 a2A5328-15ucBAS', 'camera'),
@@ -241,7 +229,6 @@ INSERT INTO `products` (`id`, `name`, `product_type`) VALUES
 (9, 'Basler boost baA3072-72cc', 'camera'),
 (10, 'Basler ace acA720-520uc', 'camera'),
 (11, 'Dell XPS 15 Laptop', 'hardware'),
-(12, 'Asus ROG Strix Gaming Laptop', 'hardware'),
 (13, 'Logitech MX Master 3S', 'hardware'),
 (14, 'Corsair Vengeance RAM 32GB', 'hardware'),
 (15, 'Samsung 980 Pro SSD 1TB', 'hardware'),
@@ -249,7 +236,8 @@ INSERT INTO `products` (`id`, `name`, `product_type`) VALUES
 (17, 'Adobe Photoshop 2024', 'software'),
 (18, 'Visual Studio 2022', 'software'),
 (19, 'AutoCAD 2025', 'software'),
-(20, 'VMware Workstation 17', 'software');
+(28, 'Phan Mem', 'software'),
+(30, 'Cameras', 'camera');
 
 -- --------------------------------------------------------
 
@@ -266,7 +254,7 @@ CREATE TABLE `softwares` (
   `release_date` date DEFAULT NULL,
   `os_supported` varchar(100) DEFAULT NULL,
   `publisher` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `avartar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `product_id` int DEFAULT NULL
@@ -276,12 +264,11 @@ CREATE TABLE `softwares` (
 -- Đang đổ dữ liệu cho bảng `softwares`
 --
 
-INSERT INTO `softwares` (`id`, `name`, `version`, `price`, `description`, `release_date`, `os_supported`, `publisher`, `avartar`, `type`, `created_at`, `product_id`) VALUES
+INSERT INTO `softwares` (`id`, `name`, `version`, `price`, `description`, `release_date`, `os_supported`, `publisher`, `avatar`, `type`, `created_at`, `product_id`) VALUES
 (1, 'Microsoft Office 2021', '2021', 150.00, 'Office suite for productivity', '2021-01-01', 'Windows, Mac', 'Microsoft', 'office2021.jpg', 'Software', '2025-05-11 15:35:01', 16),
 (2, 'Adobe Photoshop 2024', '2024', 300.00, 'Photo editing software', '2024-05-01', 'Windows, Mac', 'Adobe', 'photoshop2024.jpg', 'Software', '2025-05-11 15:35:01', 17),
 (3, 'Visual Studio 2022', '2022', 500.00, 'IDE for developers', '2022-08-01', 'Windows, Mac', 'Microsoft', 'vs2022.jpg', 'Software', '2025-05-11 15:35:01', 18),
-(4, 'AutoCAD 2025', '2025', 1000.00, 'Design and drafting software', '2025-03-01', 'Windows', 'Autodesk', 'autocad2025.jpg', 'Software', '2025-05-11 15:35:01', 19),
-(5, 'VMware Workstation 17', '17', 200.00, 'Virtual machine software', '2025-04-01', 'Windows, Linux', 'VMware', 'vmware17.jpg', 'Software', '2025-05-11 15:35:01', 20);
+(4, 'AutoCAD 2025', '2025', 1000.00, 'Design and drafting software', '2025-02-28', 'Windows', 'Autodesk', '/uploads/avatar-1747666262737-17351195.webp', 'Software', '2025-05-11 15:35:01', 19);
 
 -- --------------------------------------------------------
 
@@ -303,17 +290,17 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `birthday` date DEFAULT NULL,
-  `gender` enum('male','female','other') DEFAULT NULL
+  `gender` enum('male','female','other') DEFAULT NULL,
+  `status` tinyint DEFAULT '1' COMMENT '1: active, 0: inactive, 2: banned, 3: pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `full_name`, `phone`, `address`, `avatar`, `role`, `is_verified`, `created_at`, `updated_at`, `birthday`, `gender`) VALUES
-(1, 'admin', 'admin@gmail.com', '$2b$10$PHo4PZ2iagcIEMLwVMAnFu8UluBfZ5sTBUrBULIP8e7FrAV9WzUxu', NULL, NULL, NULL, NULL, 'admin', 0, '2025-05-07 02:04:58', '2025-05-07 02:04:58', NULL, NULL),
-(2, 'trieu', 'tranhotrieu20122002@gmail.com', '$2b$10$a1YGnabCzzPCc5/xy5N2Le.hGLT3dUS15jH3JHKOTwSFEoF2LBxG2', 'Trieu', '334340937', '22/1C Bùi Thị Cội, khu phố Đông An, phường Tân Đông Hiệp', '/uploads/avatar-1746756571045-972864415.png', 'user', 0, '2025-05-07 02:06:03', '2025-05-09 02:28:21', '2020-11-05', 'male'),
-(4, 'helllo', 'trieuth.yame@gmail.com', '$2b$10$wm8Z9/lrlNjACGqEY5PXMu1I7YL1vuGxT/LUUy3tO.wdwf/g.Un.6', 'Trieu Ne', '334340937', '22/1C Bùi Thị Cội, khu phố Đông An, phường Tân Đông Hiệp', '/uploads/avatar-1746699020986-890995877.png', 'user', 0, '2025-05-08 09:29:04', '2025-05-08 10:10:20', NULL, 'male');
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `full_name`, `phone`, `address`, `avatar`, `role`, `is_verified`, `created_at`, `updated_at`, `birthday`, `gender`, `status`) VALUES
+(1, 'admin', 'admin@gmail.com', '$2b$10$PHo4PZ2iagcIEMLwVMAnFu8UluBfZ5sTBUrBULIP8e7FrAV9WzUxu', NULL, NULL, NULL, NULL, 'admin', 0, '2025-05-07 02:04:58', '2025-05-07 02:04:58', NULL, NULL, 1),
+(7, 'Trieu', 'tranhotrieu20122002@gmail.com', '$2b$10$.Fr1yynqE8S.MOmbJ.I6feKs04A6pl4yIM4HLLdEYX.kPG0V0007e', NULL, NULL, NULL, '/uploads/avatar-1747584484823-995146354.jpg', 'user', 0, '2025-05-18 15:16:49', '2025-05-18 16:08:04', NULL, NULL, 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -401,25 +388,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `cameras`
 --
 ALTER TABLE `cameras`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT cho bảng `email_verifications`
 --
 ALTER TABLE `email_verifications`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `hardwares`
 --
 ALTER TABLE `hardwares`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
@@ -449,19 +436,19 @@ ALTER TABLE `password_reset_codes`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT cho bảng `softwares`
 --
 ALTER TABLE `softwares`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

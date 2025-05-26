@@ -26,6 +26,8 @@ import Home from "./pages/Home";
 import ProductList from "./pages/products/ProductCategory";
 import Profield from "./pages/Profield";
 
+
+
 function AppRoutes() {
   // Cuộng về đầu trang
   useEffect(() => {
@@ -97,6 +99,7 @@ function AppRoutes() {
       </Routes>
     </UserLayout>
   );
+  
 }
 
 export default AppRoutes;

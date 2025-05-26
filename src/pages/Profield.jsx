@@ -218,40 +218,92 @@ export default function Profield() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  //   const handleAvatarUpload = (e) => {
+  //     const file = e.target.files[0];
+  //     console.log(file);
+  //     if (file) {
+  //       setAvatarFile(file);
+
+  //       // Xem trước ảnh
+  //       const reader = new FileReader();
+  //       reader.onloadend = () => {
+  //         setFormData((prev) => ({
+  //           ...prev,
+  //           avatar: reader.result,
+  //         }));
+  //       };
+  //       console.log("File avartar sản phẩm: ", formData.avatar);
+  //       reader.readAsDataURL(file);
+  //     }
+  //   };
   const handleAvatarUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setAvatarFile(file);
+      setAvatarFile(file); // giữ lại ảnh dạng file để upload
 
-      // Xem trước ảnh
+      // Xem trước ảnh (chỉ để hiển thị, không đưa vào dữ liệu gửi đi)
       const reader = new FileReader();
       reader.onloadend = () => {
         setFormData((prev) => ({
           ...prev,
-          avatar: reader.result,
+          avatarPreview: reader.result, // chỉ để hiển thị
         }));
       };
       reader.readAsDataURL(file);
     }
   };
 
+  //   const handleSubmit = async (e) => {
+  //     e.preventDefault();
+  //     try {
+  //       const data = new FormData();
+  //       Object.entries(formData).forEach(([key, value]) => {
+  //         if (value !== null && value !== undefined) {
+  //           // Xử lý ngày sinh khi gửi lên server
+  //           if (key === "birthday") {
+  //             const dateOnly = moment(value)
+  //               .tz("Asia/Ho_Chi_Minh")
+  //               .format("YYYY-MM-DD"); // Sử dụng moment-timezone
+  //             data.append(key, dateOnly);
+  //           } else {
+  //             data.append(key, value);
+  //           }
+  //         }
+  //       });
+
+  //       await API.put(`/user/${user.id}`, data, {
+  //         headers: { "Content-Type": "multipart/form-data" },
+  //       });
+  //       toast.success("Cập nhật thành công.");
+  //     } catch (error) {
+  //       console.error(error);
+  //       toast.error("Cập nhật thất bại!");
+  //     }
+  //   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const data = new FormData();
+
+      // Gửi các trường dữ liệu văn bản
       Object.entries(formData).forEach(([key, value]) => {
-        if (value !== null && value !== undefined) {
-          // Xử lý ngày sinh khi gửi lên server
-          if (key === "birthday") {
-            const dateOnly = moment(value)
-              .tz("Asia/Ho_Chi_Minh")
-              .format("YYYY-MM-DD"); // Sử dụng moment-timezone
-            data.append(key, dateOnly);
-          } else {
-            data.append(key, value);
-          }
+        if (
+          key !== "avatarPreview" && // loại bỏ avatarPreview (dùng chỉ để preview ảnh)
+          value !== null &&
+          value !== undefined
+        ) {
+          const finalValue =
+            key === "birthday"
+              ? moment(value).tz("Asia/Ho_Chi_Minh").format("YYYY-MM-DD")
+              : value;
+          data.append(key, finalValue);
         }
       });
+
+      // Thêm ảnh vào FormData nếu người dùng chọn
+      if (avatarFile) {
+        data.append("avatar", avatarFile);
+      }
 
       await API.put(`/user/${user.id}`, data, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -268,11 +320,20 @@ export default function Profield() {
       <div className="profile-wrapper">
         <div className="profile-card glass">
           <div className="left-column">
+            {/* <img
+              src={
+                formData.avatar?.startsWith("data:")
+                  ? formData.avatar
+                  : `http://localhost:8000${formData.avatar}`
+              }
+              alt="Avatar"
+              className="profile-avatar"
+            /> */}
             <img
               src={
-                typeof formData.avatar === "string"
-                  ? `http://localhost:8000/api${formData.avatar}`
-                  : URL.createObjectURL(formData.avatar)
+                formData.avatarPreview
+                  ? formData.avatarPreview
+                  : `http://localhost:8000${formData.avatar}`
               }
               alt="Avatar"
               className="profile-avatar"

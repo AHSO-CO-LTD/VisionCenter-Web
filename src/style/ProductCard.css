@@ -1,88 +1,130 @@
-/* Container chính của mỗi sản phẩm */
 .product-card {
-  width: 260px;
-  background-color: var(--color-background);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+   width: 350px;
+   border-radius: 2rem;
+   overflow: hidden;
+   background: #fff;
+   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+   transition: transform 0.4s ease, box-shadow 0.4s ease;
+   position: relative;
+   animation: fadeInUp 1s ease;
+   padding: 10px 20px;
   
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Hình ảnh sản phẩm */
-.product-image-card {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-bottom: 1px solid var(--color-border);
-}
-
-/* Phần thông tin chi tiết */
-.product-details-card {
-  padding: var(--padding);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.product-name-card {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--color-text);
-  margin: 0;
-  text-align: center;
-}
-
-.product-price-card {
-  font-size: 14px;
-  color: var(--color-secondary);
-  text-align: center;
-  font-weight: bold;
-  margin: 0;
-}
-
-/* Nút hành động */
-.add-to-cart-btn-card,
-.view-details-btn-card {
-  padding: 10px;
-  font-size: 14px;
-  border: none;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.add-to-cart-btn-card {
-  background-color: var(--color-secondary);
-  color: white;
-}
-
-.add-to-cart-btn-card:hover {
-  background-color: var(--color-accent);
-  transform: scale(1.02);
-}
-
-.view-details-btn-card {
-  background-color: var(--color-primary);
-  color: white;
-}
-
-.view-details-btn-card:hover {
-  background-color: var(--color-accent);
-  transform: scale(1.02);
-}
-
-/* Hiệu ứng khi các nút bấm */
-.add-to-cart-btn-card:focus,
-.view-details-btn-card:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 144, 208, 0.2);
-}
+ }
+ 
+ .product-card:hover {
+   transform: translateY(-8px);
+   box-shadow: 0 25px 45px rgba(0, 102, 179, 0.25);
+ }
+ 
+ .product-image-container {
+   position: relative;
+   overflow: hidden;
+ }
+ 
+ .product-image-card {
+   width: 100%;
+   height: 220px;
+   object-fit: cover;
+   transition: transform 0.5s ease;
+ }
+ 
+ .product-card:hover .product-image-card {
+   transform: scale(1.08);
+   filter: brightness(1.1);
+ }
+ 
+ .product-image-overlay {
+   position: absolute;
+   inset: 0;
+   background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+   opacity: 0;
+   display: flex;
+   align-items: flex-start;
+   justify-content: flex-end;
+   padding: 1rem;
+   transition: opacity 0.4s ease;
+ }
+ 
+ .product-card:hover .product-image-overlay {
+   opacity: 1;
+ }
+ 
+ .view-icon {
+   color: #fff;
+   font-size: 1.5rem;
+   cursor: pointer;
+   transition: transform 0.3s ease;
+ }
+ 
+ .view-icon:hover {
+   transform: scale(1.3);
+ }
+ 
+ .product-badge {
+   position: absolute;
+   top: 15px;
+   left: 15px;
+   background: linear-gradient(to right, #0066b3, #003d73);
+   color: #fff;
+   font-size: 0.75rem;
+   font-weight: bold;
+   padding: 5px 10px;
+   border-radius: 1rem;
+   text-transform: uppercase;
+   animation: floatBadge 3s ease-in-out infinite;
+ }
+ 
+ @keyframes floatBadge {
+   0%, 100% { transform: translateY(0px); }
+   50% { transform: translateY(-5px); }
+ }
+ 
+ .product-details-card {
+   padding: 1.5rem;
+   text-align: center;
+ }
+ 
+ .product-name-card {
+   font-size: 1.4rem;
+   font-weight: 700;
+   color: #003d73;
+   margin-bottom: 0.5rem;
+ }
+ 
+ .product-price-card {
+   font-size: 1.1rem;
+   color: #333;
+   margin-bottom: 1.2rem;
+ }
+ 
+ .add-to-cart-btn-card {
+   width: 100%;
+   padding: 0.75rem 1rem;
+   border-radius: 999px;
+   background: linear-gradient(to right, #0066b3, #003d73);
+   color: #fff;
+   border: none;
+   font-size: 1rem;
+   font-weight: 600;
+   cursor: pointer;
+   box-shadow: 0 8px 20px rgba(0, 102, 179, 0.4);
+   transition: all 0.4s ease;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+ }
+ 
+ .add-to-cart-btn-card:hover {
+   transform: translateY(-3px);
+   box-shadow: 0 12px 28px rgba(0, 102, 179, 0.6);
+ }
+ 
+ .icon {
+   transition: transform 0.3s ease;
+ }
+ 
+ .add-to-cart-btn-card:hover .icon {
+   transform: scale(1.2);
+ }
+ 

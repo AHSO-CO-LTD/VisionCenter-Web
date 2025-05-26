@@ -1,182 +1,340 @@
+import {
+  faBirthdayCake,
+  faCheckCircle,
+  faEdit,
+  faEnvelope,
+  faIdCard,
+  faImage,
+  faLock,
+  faMapMarkerAlt,
+  faPhone,
+  faPlusCircle,
+  faTrash,
+  faUser,
+  faUserShield,
+  faVenusMars,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import PageWrapper from "../../components/PageWrapper";
+import "../../style/ManagerUser.css";
 import API from "../../utils/api";
 
-export default function ManagerUser() {
+const ManagerUser = () => {
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState({
     username: "",
     email: "",
     password: "",
+    full_name: "",
+    birthday: "",
+    phone: "",
+    gender: "male",
+    address: "",
+    avatar: "",
     role: "user",
+    status: "active",
   });
   const [editingUser, setEditingUser] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
   const fetchUsers = () => {
-    API.get("/user")
-      .then((res) => setUsers(res.data))
-      .catch((err) => console.error(err));
-  };
-  
-  const handleDelete = (id) => {
-    if (window.confirm("Bạn có chắc muốn xoá người dùng này?")) {
-      API.delete(`/user/${id}`)
-        .then(() => fetchUsers())
-        .catch((err) => console.error(err));
-    }
-  };
-  const handleAddUser = () => {
-    if (
-      !newUser.username ||
-      !newUser.email ||
-      !newUser.password ||
-      !newUser.role
-    ) {
-      alert("Vui lòng nhập đầy đủ thông tin.");
-      return;
-    }
-    API.post("/user", newUser).then(() => {
-      fetchUsers();
-      setNewUser({ username: "", email: "", password: "", role: "user" });
+    API.get("/user").then((res) => {
+      setUsers(Array.isArray(res.data) ? res.data : []);
     });
   };
 
-  const handleEditUser = (users) => {
-    setEditingUser(users);
-    setNewUser({ ...users });
-  };
-  const handleUpdateUser = () => {
+  const handleAddUser = () => {
+    const {
+      username,
+      email,
+      password,
+      full_name,
+      birthday,
+      phone,
+      gender,
+      address,
+      avatar,
+      role,
+      status,
+    } = newUser;
+
     if (
-      !newUser.username ||
-      !newUser.email ||
-      !newUser.password ||
-      !newUser.role
+      !username ||
+      !email ||
+      !password ||
+      !full_name ||
+      !birthday ||
+      !phone ||
+      !gender ||
+      !address ||
+      !avatar ||
+      !status ||
+      !role
     ) {
-      alert("Vui lòng nhập đầy đủ thông tin");
+      alert("Vui lòng nhập đầy đủ thông tin bắt buộc.");
       return;
     }
-    API.put(`/user/${newUser.id}`, newUser).then(() => {
+
+    const apiCall = editingUser
+      ? API.put(`/user/${editingUser.id}`, newUser)
+      : API.post("/user", newUser);
+
+    apiCall.then(() => {
       fetchUsers();
-      setEditingUser(null);
-      setNewUser({ username: "", email: "", password: "", role: "" });
+      resetForm();
+      setShowForm(false);
     });
+  };
+
+  const handleDelete = (id) => {
+    if (window.confirm("Bạn có chắc muốn xóa người dùng này?")) {
+      API.delete(`/user/${id}`).then(() => fetchUsers());
+    }
+  };
+
+  const handleEditUser = (user) => {
+    setNewUser(user);
+    setEditingUser(user);
+    setShowForm(true);
+  };
+
+  const resetForm = () => {
+    setNewUser({
+      username: "",
+      email: "",
+      password: "",
+      full_name: "",
+      birthday: "",
+      phone: "",
+      gender: "male",
+      address: "",
+      avatar: "",
+      role: "user",
+      status: "active",
+    });
+    setEditingUser(null);
   };
 
   return (
-    <PageWrapper>
-      <div style={styles.container}>
-        <h2 style={styles.title}>👥 Danh sách người dùng</h2>
-        {/* Form Thêm/ Sửa sản phẩm */}
-        <div>
-          <h3> {editingUser ? "Sửa người dùng" : "Thêm người dùng mới"}</h3>
-          <input
-            type="text"
-            placeholder="Tên người dùng"
-            value={newUser.username}
-            onChange={(e) =>
-              setNewUser({ ...newUser, username: e.target.value })
-            }
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={newUser.email}
-            onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-          />
-          <input
-            type="text"
-            placeholder="Mật khẩu"
-            value={newUser.password}
-            onChange={(e) =>
-              setNewUser({ ...newUser, password: e.target.value })
-            }
-          />
-          <select
-            value={newUser.role}
-            onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
-          >
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select>
-          <button
-            style={styles.addButton}
-            onClick={editingUser ? handleUpdateUser : handleAddUser}
-          >
-            {editingUser ? "Cập nhật người dùng" : "Thêm người dùng"}
-          </button>
-        </div>
-        <table style={styles.table}>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Ngày tạo</th>
-              <th>Hành động</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((u, index) => (
-              <tr key={u.id}>
-                <td>{index + 1}</td>
-                <td>{u.username}</td>
-                <td>{u.email}</td>
-                <td>{u.role}</td>
-                <td>{new Date(u.created_at).toLocaleDateString("vi-VN")}</td>
-                <td>
-                  <button onClick={() => handleDelete(u.id)}>🗑️ Xoá</button>
-                  <button
-                    style={{ marginLeft: 10 }}
-                    onClick={() => handleEditUser(u)}
-                  >
-                    ✏️ Sửa
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </PageWrapper>
-  );
-}
+    <div className="manager-container">
+      <h2>QUẢN LÝ NGƯỜI DÙNG</h2>
 
-const styles = {
-  container: {
-    padding: "24px",
-  },
-  title: {
-    fontSize: "24px",
-    marginBottom: "16px",
-  },
-  table: {
-    width: "100%",
-    borderCollapse: "collapse",
-    boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-  },
-  formContainer: {
-    marginBottom: "20px",
-  },
-  input: {
-    display: "block",
-    marginBottom: "10px",
-    padding: "8px",
-    width: "100%",
-    borderRadius: "4px",
-    border: "1px solid #ccc",
-  },
-  addButton: {
-    padding: "10px 15px",
-    backgroundColor: "#4CAF50",
-    color: "white",
-    border: "none",
-    borderRadius: "4px",
-    cursor: "pointer",
-    margin: "10px 0",
-  },
+      {!showForm && (
+        <button
+          className="add-btn"
+          onClick={() => {
+            resetForm();
+            setShowForm(true);
+          }}
+        >
+          <FontAwesomeIcon icon={faPlusCircle} style={{ marginRight: 8 }} />
+          Thêm người dùng
+        </button>
+      )}
+
+      {showForm && (
+        <div className="user-form">
+          <h3>{editingUser ? "Sửa người dùng" : "Thêm người dùng"}</h3>
+
+          <div className="input-group">
+            <FontAwesomeIcon icon={faUser} className="icon" />
+            <input
+              type="text"
+              placeholder="Tên người dùng"
+              value={newUser.username}
+              onChange={(e) =>
+                setNewUser({ ...newUser, username: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="input-group">
+            <FontAwesomeIcon icon={faEnvelope} className="icon" />
+            <input
+              type="email"
+              placeholder="Email"
+              value={newUser.email}
+              onChange={(e) =>
+                setNewUser({ ...newUser, email: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="input-group">
+            <FontAwesomeIcon icon={faLock} className="icon" />
+            <input
+              type="password"
+              placeholder="Mật khẩu"
+              value={newUser.password}
+              onChange={(e) =>
+                setNewUser({ ...newUser, password: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="input-group">
+            <FontAwesomeIcon icon={faIdCard} className="icon" />
+            <input
+              type="text"
+              placeholder="Họ và tên"
+              value={newUser.full_name}
+              onChange={(e) =>
+                setNewUser({ ...newUser, full_name: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="input-group">
+            <FontAwesomeIcon icon={faBirthdayCake} className="icon" />
+            <input
+              type="date"
+              value={newUser.birthday}
+              onChange={(e) =>
+                setNewUser({ ...newUser, birthday: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="input-group">
+            <FontAwesomeIcon icon={faPhone} className="icon" />
+            <input
+              type="text"
+              placeholder="Số điện thoại"
+              value={newUser.phone}
+              onChange={(e) =>
+                setNewUser({ ...newUser, phone: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="input-group">
+            <FontAwesomeIcon icon={faVenusMars} className="icon" />
+            <select
+              value={newUser.gender}
+              onChange={(e) =>
+                setNewUser({ ...newUser, gender: e.target.value })
+              }
+            >
+              <option value="male">Nam</option>
+              <option value="female">Nữ</option>
+              <option value="other">Khác</option>
+            </select>
+          </div>
+
+          <div className="input-group">
+            <FontAwesomeIcon icon={faMapMarkerAlt} className="icon" />
+            <input
+              type="text"
+              placeholder="Địa chỉ"
+              value={newUser.address}
+              onChange={(e) =>
+                setNewUser({ ...newUser, address: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="input-group">
+            <FontAwesomeIcon icon={faImage} className="icon" />
+            <input
+              type="text"
+              placeholder="Link ảnh đại diện"
+              value={newUser.avatar}
+              onChange={(e) =>
+                setNewUser({ ...newUser, avatar: e.target.value })
+              }
+            />
+          </div>
+
+          <div className="input-group">
+            <FontAwesomeIcon icon={faUserShield} className="icon" />
+            <select
+              value={newUser.role}
+              onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+            >
+              <option value="user">Người dùng</option>
+              <option value="admin">Quản trị viên</option>
+            </select>
+          </div>
+
+          <div className="input-group">
+            <FontAwesomeIcon icon={faCheckCircle} className="icon" />
+            <select
+              value={newUser.status}
+              onChange={(e) =>
+                setNewUser({ ...newUser, status: e.target.value })
+              }
+            >
+              <option value="active">Hoạt động</option>
+              <option value="inactive">Vô hiệu</option>
+            </select>
+          </div>
+
+          <div className="form-actions">
+            <button onClick={handleAddUser}>
+              <FontAwesomeIcon
+                icon={faPlusCircle}
+                style={{ marginRight: "8px" }}
+              />
+              {editingUser ? "Cập nhật" : "Lưu người dùng"}
+            </button>
+            <button
+              onClick={() => {
+                resetForm();
+                setShowForm(false);
+              }}
+            >
+              Hủy
+            </button>
+          </div>
+        </div>
+      )}
+
+      <table className="user-table">
+        <thead>
+          <tr>
+            <th>Avatar</th>
+            <th>Tên</th>
+            <th>Email</th>
+            <th>Giới tính</th>
+            <th>Trạng thái</th>
+            <th>Vai trò</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((u) => (
+            <tr key={u.id}>
+              <td>
+                <img
+                  src={u.avatar || "https://via.placeholder.com/40"}
+                  alt="avatar"
+                  width="40"
+                  height="40"
+                />
+              </td>
+              <td>{u.username}</td>
+              <td>{u.email}</td>
+              <td>{u.gender}</td>
+              <td>{u.status}</td>
+              <td>{u.role}</td>
+              <td>
+                <button onClick={() => handleEditUser(u)}>
+                  <FontAwesomeIcon icon={faEdit} />
+                </button>
+                <button onClick={() => handleDelete(u.id)}>
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
+
+export default ManagerUser;

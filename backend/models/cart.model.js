@@ -82,10 +82,10 @@ const CartModel = {
         WHEN 'software' THEN softwares.price
       END AS price,
       CASE cart.product_type
-        WHEN 'camera' THEN cameras.avartar
-        WHEN 'hardware' THEN hardwares.avartar
-        WHEN 'software' THEN softwares.avartar
-      END AS avartar
+        WHEN 'camera' THEN cameras.avatar
+        WHEN 'hardware' THEN hardwares.avatar
+        WHEN 'software' THEN softwares.avatar
+      END AS avatar
     FROM cart
     LEFT JOIN cameras ON (cart.product_type = 'camera' AND cart.product_id = cameras.id)
     LEFT JOIN hardwares ON (cart.product_type = 'hardware' AND cart.product_id = hardwares.id)
@@ -113,12 +113,12 @@ const CartModel = {
     product_type,
     quantity,
     name,
-    avartar,
+    avatar,
     price
   ) {
     return db.query(
-      "UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ? AND product_type = ? AND name = ? AND avartar = ? AND price = ?",
-      [quantity, user_id, product_id, product_type, name, avartar, price]
+      "UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ? AND product_type = ? AND name = ? AND avatar = ? AND price = ?",
+      [quantity, user_id, product_id, product_type, name, avatar, price]
     );
   },
 
@@ -129,13 +129,13 @@ const CartModel = {
     product_type,
     quantity,
     name,
-    avartar,
+    avatar,
     price
   ) {
     
     return db.query(
-      "INSERT INTO cart (user_id, product_id, product_type, quantity, name, avartar, price) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [user_id, product_id, product_type, quantity, name, avartar, price]
+      "INSERT INTO cart (user_id, product_id, product_type, quantity, name, avatar, price) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [user_id, product_id, product_type, quantity, name, avatar, price]
     );
   },
 

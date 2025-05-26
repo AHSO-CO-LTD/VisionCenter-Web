@@ -13,8 +13,9 @@ exports.getCartByUserId = async (req, res) => {
 };
 
 exports.addToCart = async (req, res) => {
-  const { user_id, product_id, product_type, quantity, name, avartar, price } =
+  const { user_id, product_id, product_type, quantity, name, avatar, price } =
     req.body;
+ 
   try {
     const rows = await Cart.findCartItem(user_id, product_id, product_type);
 
@@ -25,7 +26,7 @@ exports.addToCart = async (req, res) => {
         product_type,
         quantity,
         name,
-        avartar,
+        avatar,
         price
       );
       res.json({ message: "Cập nhật số lượng giỏ hàng" });
@@ -36,7 +37,7 @@ exports.addToCart = async (req, res) => {
         product_type,
         quantity,
         name,
-        avartar,
+        avatar,
         price
       );
       res.json({ message: "Thêm vào giỏ hàng thành công" });

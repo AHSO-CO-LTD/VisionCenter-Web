@@ -5,7 +5,6 @@ import ProductCard from "../../components/ProductCard";
 import "../../style/ProductCategory.css";
 import API from "../../utils/api";
 
-// FontAwesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCamera,
@@ -35,22 +34,27 @@ export default function ProductCategory() {
 
   return (
     <PageWrapper>
-      <div className="category-container">
-        <h1 className="category-title">✨ Chọn danh mục sản phẩm</h1>
+      <div className="category-container tech-theme">
+        <div className="category-hero">
+          <h1 className="category-title glitch-text">
+            ✨ Chọn danh mục sản phẩm
+          </h1>
+        </div>
+
         <div className="category-list">
-          <Link to="/product/cameras" className="category-card">
+          <Link to="/product/cameras" className="category-card card-glow">
             <div className="category-icon camera">
               <FontAwesomeIcon icon={faCamera} />
             </div>
             <div className="category-name">Cameras</div>
           </Link>
-          <Link to="/product/softwares" className="category-card">
+          <Link to="/product/softwares" className="category-card card-glow">
             <div className="category-icon software">
               <FontAwesomeIcon icon={faCode} />
             </div>
             <div className="category-name">Phần mềm</div>
           </Link>
-          <Link to="/product/hardwares" className="category-card">
+          <Link to="/product/hardwares" className="category-card card-glow">
             <div className="category-icon hardware">
               <FontAwesomeIcon icon={faMicrochip} />
             </div>
@@ -58,9 +62,8 @@ export default function ProductCategory() {
           </Link>
         </div>
 
-        {/* Hiển thị Sản phẩm nổi bật */}
         <div className="featured-products-section">
-          <h2>Sản phẩm nổi bật</h2>
+          <h2 className="section-heading">Sản phẩm nổi bật</h2>
 
           <h3 className="category-label">📷 Cameras</h3>
           <div className="featured-products-list">

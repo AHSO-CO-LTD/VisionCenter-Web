@@ -1,53 +1,45 @@
 const User = require("../models/user.model");
 
 exports.getAllUser = async (req, res) => {
-  const [rows] = await User.getAll();
-  res.json(rows);
+  try {
+    const rows = await User.getAll();
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "Lỗi server khi lấy danh sách người dùng: ", err });
+  }
 };
 exports.createUser = async (req, res) => {
-  const { username, email, password } = req.body;
-  await User.create({ username, email, password });
+  const {
+    username,
+    email,
+    password,
+    full_name,
+    birthday,
+    phone,
+    gender,
+    address,
+    avatar,
+    status,
+    role, 
+  } = req.body;
+  await User.create({
+    username,
+    email,
+    password,
+    full_name,
+    birthday,
+    phone,
+    gender,
+    address,
+    avatar,
+    status,
+    role,
+  });
   res.json({ message: "Tạo user thành công." });
 };
-// exports.updateUser = async (req, res) => {
-//   const { id } = req.params;
-//   const {
-//     username,
-//     email,
-//     password,
-//     full_name,
-//     phone,
-//     address,
-//     avatar,
-//     role,
-//     birthday,
-//     gender,
-//   } = req.body;
-
-//   // Hàm xử lý undefined
-//   const sanitize = (value) => (value === undefined ? null : value);
-
-//   try {
-//     await User.update({
-//       id: parseInt(id), // đảm bảo id là số
-//       username: sanitize(username),
-//       email: sanitize(email),
-//       password: sanitize(password),
-//       full_name: sanitize(full_name),
-//       phone: sanitize(phone),
-//       address: sanitize(address),
-//       avatar: sanitize(avatar),
-//       role: sanitize(role),
-//       birthday: sanitize(birthday),
-//       gender: sanitize(gender),
-//     });
-
-//     res.json({ message: "Cập nhật thành công." });
-//   } catch (error) {
-//     console.error("Lỗi cập nhật người dùng:", error.message);
-//     res.status(500).json({ error: "Lỗi cập nhật người dùng." });
-//   }
-// };
 
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
@@ -89,6 +81,7 @@ exports.updateUser = async (req, res) => {
     res.status(500).json({ error: "Lỗi cập nhật người dùng." });
   }
 };
+
 
 exports.deleteUser = async (req, res) => {
   const { id } = req.params;

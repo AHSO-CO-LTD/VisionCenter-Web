@@ -4,6 +4,9 @@ import { useCart } from "../context/CartContext";
 import "../style/ProductCard.css";
 import API from "../utils/api";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartPlus, faEye } from "@fortawesome/free-solid-svg-icons";
+
 export default function ProductCard({ product }) {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -14,7 +17,6 @@ export default function ProductCard({ product }) {
       navigate("/login");
       return;
     }
-    // console.log(product);
     try {
       await API.post("/cart", {
         user_id: user.id,
@@ -22,7 +24,7 @@ export default function ProductCard({ product }) {
         product_type: product.type,
         quantity: 1,
         name: product.name,
-        avartar: product.avartar,
+        avatar: product.avatar,
         price: product.price,
       });
       addToCart(product);
@@ -36,20 +38,30 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <div className="product-card">
-      <img
-        src={`${product.avartar}`}
-        alt={product.name}
-        className="product-image-card"
-      />
+    <div className="product-card" data-aos="zoom-in">
+      <div className="product-image-container">
+        <img
+          src={`http://localhost:8000${product.avatar}`}
+          alt={product.name}
+          className="product-image-card"
+        />
+        <div className="product-image-overlay">
+          <FontAwesomeIcon
+            icon={faEye}
+            className="view-icon"
+            onClick={handleViewDetails}
+          />
+        </div>
+        <div className="product-badge">Mới</div>
+      </div>
+
       <div className="product-details-card">
         <h3 className="product-name-card">{product.name}</h3>
         <p className="product-price-card">{product.price.toLocaleString()} đ</p>
+
         <button className="add-to-cart-btn-card" onClick={handleAddToCart}>
+          <FontAwesomeIcon icon={faCartPlus} className="icon" />
           Thêm vào giỏ hàng
-        </button>
-        <button className="view-details-btn-card" onClick={handleViewDetails}>
-          Xem chi tiết
         </button>
       </div>
     </div>
